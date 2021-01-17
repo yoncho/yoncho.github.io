@@ -1,0 +1,13 @@
+---
+layout: default
+title: "Opencv, 영상처리 🎥"
+description: 영상처리관련 개발자가 되기 위해 OpenCV 공부 정리를 합니다.
+main: true
+project-header: true
+---
+
+<ul class="catalogue">
+  {% assign sorted = site.pages | sort: 'order' | reverse %} {% for page in
+  sorted %} {% if page.js == true %} {% include post-list.html %} {% endif %} {%
+  endfor %}
+</ul>
