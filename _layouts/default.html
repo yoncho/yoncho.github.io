@@ -14,8 +14,8 @@
                         class="normal" {% endif %} class="active">About</a>
                 </li>
                 <li class="transition">
-                    <a href="{{ '/TIL' | prepend: site.baseurl }}" {% if current[1] == "til" %} class="active"
-                        {% endif %}>TIL</a>
+                    <a href="{{ '/TIL' | prepend: site.baseurl }}" {% if current[1] == "til" %} 
+                        class="active" {% endif %}>TIL</a>
                 </li>
                 <li class="transition">
                     <a href="{{ '/algorithm' | prepend: site.baseurl }}" {% if current[1] == "algorithm" %}
