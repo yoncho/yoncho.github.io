@@ -1,0 +1,33 @@
+# Permalinks
+plugins: [jekyll-paginate]
+gems:
+  - jekyll-pagination
+permalink: /:title
+paginate: 8
+paginate_path: /page:num/
+
+# Setup
+title: HyunKyu, 개발 공부
+baseurl: ""
+url: "https://codeFabian.github.io"
+
+# Assets
+sass:
+  sass_dir: _sass
+  style: :compressed
+
+# Build settings
+markdown: kramdown
+
+# About
+author:
+  name: Hyunkyu
+  url: https://codeFabian.github.io/
+  email: khg.fabian@gmail.com
+  github: codeFabian
+  google_analytics: G-86WEDG64TH
+
+# Custom vars
+version: 1.0.0
+github:
+  repo: https://github.com/codeFabian/codeFabian.github.io

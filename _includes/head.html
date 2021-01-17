@@ -1,0 +1,72 @@
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <title>{{ page.title }}</title>
+
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+  <script
+    async
+    src="https://www.googletagmanager.com/gtag/js?id=G-86WEDG64TH"
+  ></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag() {
+      dataLayer.push(arguments);
+    }
+    gtag("js", new Date());
+
+    gtag("config", "G-86WEDG64TH");
+  </script>
+
+  <!-- Post info -->
+  <meta property="og:site_name" content="{{ site.title }}" />
+  <meta property="fb:app_id" content="1607605225977118" />
+  <meta property="og:type" content="article" />
+  <meta property="og:url" content="{{ site.url }}{{ page.url }}" />
+
+  <meta
+    property="og:image"
+    content="{% if page.post-header == true or page.project-header == true %}{{ site.url }}{{ page.url }}{{ page.header-img }}{% else %}{{ site.url }}{{ '/img/share-img.jpg'}}{% endif %}"
+  />
+
+  <meta name="twitter:card" content="summary_large_image" />
+
+  <!-- title -->
+  <meta
+    property="og:title"
+    content="{% if page.url == '/' %}{{ page.subtitle}}{% else %}{{ page.title }}{% endif %}"
+  />
+
+  <!-- <meta name="twitter:title" content="{% if page.url == '/' %}{{ page.subtitle}}{% else %}{{ page.title }}{% endif %}"> -->
+
+  <!-- description -->
+  <meta
+    property="og:description"
+    content="{% if page.main == true %}{{ page.description }}{% else %}{{ page.content | truncatewords: 30 | strip_html }}{% endif %}"
+  />
+
+  <!-- <meta name="twitter:description" content="{% if page.main == true %}{{ page.description }}{% else %}{{ page.content | truncatewords: 30 | strip_html }}{% endif %}"> -->
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="{{ site.baseurl }}/styles.css" />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;500;700;900&display=swap"
+    rel="stylesheet"
+  />
+  <link
+    href="http://cdn.jsdelivr.net/gh/joungkyun/font-d2coding/d2coding.css"
+    rel="stylesheet"
+    type="text/css"
+  />
+  <link
+    href="//spoqa.github.io/spoqa-han-sans/css/SpoqaHanSans-kr.css"
+    rel="stylesheet"
+    type="text/css"
+  />
+  <link
+    href="//spoqa.github.io/spoqa-han-sans/css/SpoqaHanSans-jp.css"
+    rel="stylesheet"
+    type="text/css"
+  />
+</head>

@@ -1,0 +1,71 @@
+//initialize
+
+p,
+h2 {
+  margin: 0;
+}
+
+// color 정의
+$default-shade: #10171f;
+$default-tint: #8898aa;
+$grey-0: #333e4c;
+$grey-1: #90949a;
+$grey-2: #d8e0e7;
+$grey-2-70: rgba(216, 224, 231, 0.7);
+$grey-3: #f6f9fc;
+$grey-4: #ebeff2;
+$grey-5: #c1cad4;
+$grey-6: #b3bcc4;
+$white: #fff;
+$yellow: #fee85a;
+$shadow-color: rgba(0, 0, 0, 0.2);
+$purple: #791e94;
+$light-purple: #997efa;
+$code-color: #f15c5c;
+$black: #282c37;
+$grin: #218380;
+$dip-grin: #44633f;
+$soft-blue: #d4dfe6;
+$dip-blue: #4f86c6;
+$maron: #6f2108;
+$beige: #fff1b9;
+
+// media
+$break-medium: 900px;
+$break-small: 670px;
+
+// font-family 정의
+$san-serif: "Noto Sans KR", sans-serif;
+$source: "Noto Sans KR", sans-serif;
+$head: "Noto Sans KR", sans-serif;
+$head-sub: "Noto Sans KR", sans-serif;
+$special: "Noto Sans KR", sans-serif;
+$spoqa: 'Spoqa Han Sans', 'Spoqa Han Sans JP', 'Sans-serif'; 
+
+// @font-face {
+//   font-family: 'S-CoreDream-8Heavy';
+//   src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_six@1.2/S-CoreDream-8Heavy.woff') format('woff');
+//   font-weight: normal;
+//   font-style: normal; }
+// @font-face {
+//   font-family: 'S-CoreDream-2ExtraLight';
+//   src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_six@1.2/S-CoreDream-2ExtraLight.woff') format('woff');
+//   font-weight: normal;
+//   font-style: normal; }
+// @font-face {
+//   font-family: 'Handon3gyeopsal600g';
+//   src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_seven@1.2/Handon3gyeopsal600g.woff') format('woff');
+//   font-weight: normal;
+//   font-style: normal; }
+
+@mixin box-sizing($type: border-box) {
+  -webkit-box-sizing: $type;
+  -moz-box-sizing: $type;
+  box-sizing: $type;
+}
+
+@mixin transition($args...) {
+  -webkit-transition: $args;
+  -moz-transition: $args;
+  transition: $args;
+}
