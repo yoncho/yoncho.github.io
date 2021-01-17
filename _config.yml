@@ -7,9 +7,9 @@ paginate: 8
 paginate_path: /page:num/
 
 # Setup
-title: HyunKyu, 개발 공부
+title: yonghyun, 기록
 baseurl: ""
-url: "https://codeFabian.github.io"
+url: "https://yoncho.github.io"
 
 # Assets
 sass:
@@ -21,13 +21,13 @@ markdown: kramdown
 
 # About
 author:
-  name: Hyunkyu
-  url: https://codeFabian.github.io/
-  email: khg.fabian@gmail.com
-  github: codeFabian
-  google_analytics: G-86WEDG64TH
+  name: Yonghyun
+  url: https://yoncho.github.io/
+  email: yoncho@student.42seoul.kr
+  github: yoncho
+  google_analytics: 
 
 # Custom vars
 version: 1.0.0
 github:
-  repo: https://github.com/codeFabian/codeFabian.github.io
+  repo: https://github.com/yoncho/yoncho.github.io
