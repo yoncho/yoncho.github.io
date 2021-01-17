@@ -3,6 +3,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
   <title>{{ page.title }}</title>
+  <link rel="shortcut icon" type="image/x-icon" href="🌈">
 
   <!-- Global site tag (gtag.js) - Google Analytics -->
   <script
@@ -28,7 +29,7 @@
 
   <meta
     property="og:image"
-    content="🌈"
+    content="{% if page.post-header == true or page.project-header == true %}{{ site.url }}{{ page.url }}{{ page.header-img }}{% else %}{{ site.url }}{{ '/img/share-img.jpg'}}{% endif %}"
   />
 
   <meta name="twitter:card" content="summary_large_image" />
