@@ -77,22 +77,23 @@ U8 (= np.unit8 | 8-bit unsigned integers)를 가장 많이 활용한다.
 여기서 unsigned는 부호없음을 의미하며, integers는 정수형을 의미한다.  
 기본 integers에서 8bit의 범위는-128 ~ 127 까지지만,  
 unsigned integers에서 8bit의 범위는 0 ~ 255 까지이다.  
-
+  
 
 ```
-OpenCV형식      데이터형식         의미
-np.unit8          byte          8-bit unsigned integers
+OpenCV형식       데이터형식               의미                   
+---------------------------------------------------------------
+np.unit8          byte          8-bit unsigned integers       
 np.int8           sbyte         8-bit signed integers
 np.uint16         uint16        16-bit unsigned integers
 np.int16          int16         16-bit signed integers
 np.float32        float         32-bit floating point number
 np.double         double        64-bit floating point number
 ```
-
+  
+<code>code</code>
 ```
 color = np.zeros((height, width, 3), np.unit8)
 gray = np.zeros((rows,cols, 1), 1), np.unis8)
-
 ```
 ```
 np.zeros((height, width, 3), 정밀도)
@@ -113,13 +114,14 @@ np.zeros((height, width, 3), 정밀도)
 
 ![rgb0to255](https://user-images.githubusercontent.com/44021629/105056537-a9402380-5ab7-11eb-8247-aad6e8c87f5c.PNG)
 
-색상 표현은 8-bit   0 ~ 255 범위에서 보면    
+색상 표현은 기본 8-bit ( 0 ~ 255 ) 범위에서 보면    
 R 채널에서 0은 검은색 ,255는 빨간색을 의미한다.  
 즉, 0 ~ 255에서 255에 가까울 수록 채널색을 띄고, 0일수록 검은색을 띈다.  
 
-
+  
 ### OpenCV 채널 표현법
 
+<code>code</code> 
 ```
 color = np.zeros((height, width, 3), np.unit8)
 gray = np.zeros((rows,cols, 1), 1), np.unis8)
@@ -154,6 +156,8 @@ np.zeros((height, width, 채널수), np.unit8)
 3. **범위 (RANGE)** : 히스토그램 그래프의 x축 범위
 
 ### OpenCV 히스토그램 계산 함수
+
+<code>code</code>
 ```
 hist = cv2.calcHist(
   images,       
@@ -165,7 +169,7 @@ hist = cv2.calcHist(
   accumulate = False   #옵션
 )
 ```
-예시
+<code>예시</code>
 ```
 hist = cv2.calcHist([image], [0], None, [256], [0, 256])
 ```
@@ -184,5 +188,11 @@ hist = cv2.calcHist([image], [0], None, [256], [0, 256])
 
 <hr>
 
-  
+[비트맵 vs 벡터]  
+https://imweb.me/faq?mode=view&category=29&category2=33&idx=71515   
+[opencv 색상 조합]   
+https://bkshin.tistory.com/entry/OpenCV-7-%E3%85%87%E3%85%87   
+https://deep-learning-study.tistory.com/116   
+[opencv 히스토그램]   
+http://www.gisdeveloper.co.kr/?p=6634  
 <code>#영상처리 #재미있다 :D</code>
