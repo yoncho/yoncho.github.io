@@ -44,8 +44,9 @@ color = np.zeros((height, width, 3), np.unit8)
 gray = np.zeros((rows,cols, 1), 1), np.unis8)
 
 ```
-np.zeros((**높이**, **너비**, 3), np.unit8)
-
+```
+np.zeros((높이, 너비, 3), np.unit8)
+```
 *numpy는 행렬이나 일반적으로 대규모 다차원 배열을 쉽게 처리할 수 있게 지원하는 파이썬 라이브러리이다.*  
 
 ## 2. 이미지 정밀도
@@ -93,8 +94,9 @@ color = np.zeros((height, width, 3), np.unit8)
 gray = np.zeros((rows,cols, 1), 1), np.unis8)
 
 ```
-np.zeros((height, width, 3), **정밀도**)
-
+```
+np.zeros((height, width, 3), 정밀도)
+```
 *위 코드에서 color는 색상이미지를,  gray는 그레이스케일이미지를 의미한다.*
 
 
@@ -122,8 +124,9 @@ R 채널에서 0은 검은색 ,255는 빨간색을 의미한다.
 color = np.zeros((height, width, 3), np.unit8)
 gray = np.zeros((rows,cols, 1), 1), np.unis8)
 ```
-np.zeros((height, width, **채널수**), np.unit8)
-
+```
+np.zeros((height, width, 채널수), np.unit8)
+```
 
 
 ***중요, OpenCV에서는 RGB형태의 입력 이미지를 받아오고, 처리를 해줄때에는 BGR로 변환시켜주는 함수 cv2.Color_RGB2BGR 옵션을 사용해줘야한다. !! ***
@@ -140,7 +143,8 @@ np.zeros((height, width, **채널수**), np.unit8)
 이미지의 픽셀 값을 X축으로, 해당 픽셀 값의 사용 횟수를 Y축으로 결정한다면  
 이미지의 밝은 정도를 히스토그램으로 확인할 수 있다.  
 
-![histo_crowd](https://user-images.githubusercontent.com/44021629/105059429-9d099580-5aba-11eb-81b6-e3629a12152c.png)
+![histo_crowd](https://user-images.githubusercontent.com/44021629/105062614-253d6a00-5abe-11eb-8b22-3659e3902bb9.png)
+
 
 위 사진의 경우에는 전반적으로 어두운 사진이라 히스토그램이 0에 치우쳐진 형태로 나타난다.
 
