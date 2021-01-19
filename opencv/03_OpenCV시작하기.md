@@ -36,7 +36,7 @@ opencv에서 이미지는 3가지의 구성 요소 <code>이미지 크기</code>
 *이미지 누락은 곧 데이터의 누락이라 볼 수 있다.*
 
 ### OpenCV에서 이미지 크기 표현 방법
-
+<code>code</code>
 ```
 import numpy as np 
 
