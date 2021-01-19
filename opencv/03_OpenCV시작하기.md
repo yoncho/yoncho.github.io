@@ -37,7 +37,7 @@ opencv에서 이미지는 3가지의 구성 요소 <code>이미지 크기</code>
 
 ### OpenCV에서 이미지 크기 표현 방법
 
-```py
+```
 import numpy as np 
 
 color = np.zeros((height, width, 3), np.unit8)
@@ -89,7 +89,7 @@ np.float32        float         32-bit floating point number
 np.double         double        64-bit floating point number
 ```
 
-```py
+```
 color = np.zeros((height, width, 3), np.unit8)
 gray = np.zeros((rows,cols, 1), 1), np.unis8)
 
@@ -120,7 +120,7 @@ R 채널에서 0은 검은색 ,255는 빨간색을 의미한다.
 
 ### OpenCV 채널 표현법
 
-```py
+```
 color = np.zeros((height, width, 3), np.unit8)
 gray = np.zeros((rows,cols, 1), 1), np.unis8)
 ```
@@ -154,7 +154,7 @@ np.zeros((height, width, 채널수), np.unit8)
 3. **범위 (RANGE)** : 히스토그램 그래프의 x축 범위
 
 ### OpenCV 히스토그램 계산 함수
-```py
+```
 hist = cv2.calcHist(
   images,       
   channels,
@@ -166,7 +166,7 @@ hist = cv2.calcHist(
 )
 ```
 예시
-```py
+```
 hist = cv2.calcHist([image], [0], None, [256], [0, 256])
 ```
 위 코드는 입력된 image를 단일 채널일 경우 [0], 다중 채널일 경우 [0] = Blue를 의미, 히스토그램의 크기 (빈도수)를 256으로 지정, x축의 범위를 0부터 256까지 지정하고 그 결과를 hist에 저장한다
