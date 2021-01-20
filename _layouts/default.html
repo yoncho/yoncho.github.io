@@ -10,12 +10,12 @@
             <ul>
                 <li class="transition">
                     <a href="{{ '' | prepend: site.baseurl }}/"
-                        {% if current[1] == "algorithm" or current[1] == "opencv" or current[1] == "report" %}
+                        {% if current[1] == "tensorflow" or current[1] == "opencv" or current[1] == "report" %}
                         class="normal" {% endif %} class="active">About</a>
                 </li>
                 <li class="transition">
-                    <a href="{{ '/algorithm' | prepend: site.baseurl }}" {% if current[1] == "algorithm" %}
-                        class="active" {% endif %}>Algorithm</a>
+                    <a href="{{ '/tensorflow' | prepend: site.baseurl }}" {% if current[1] == "tensorflow" %}
+                        class="active" {% endif %}>TensorFlow</a>
                 </li>
                 <li class="transition">
                     <a href="{{ '/opencv' | prepend: site.baseurl }}" {% if current[1] == "opencv" %}
