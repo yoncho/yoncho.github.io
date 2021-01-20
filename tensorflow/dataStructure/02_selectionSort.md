@@ -4,7 +4,7 @@ title: 선택정렬
 subtitle: Sort
 type: 자료구조
 createDate: 2021-01-02
-solution: true
+tensorflow: true
 text: true
 author: "codeFabian"
 post-header: false
