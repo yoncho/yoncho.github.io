@@ -4,7 +4,7 @@ title: 자료구조(1), Stack,Queue
 subtitle: tensorflow
 type: 자료구조
 createDate: 2020-09-22
-solution: true
+tensorflow: true
 text: true
 author: "codeFabian"
 post-header: false
