@@ -3,7 +3,7 @@ layout: post
 title: OpenCV 동영상 I/O
 subtitle: "동영상 입력 & 출력"
 type: "OpenCV"
-createDate: 2021-01-20
+createDate: 2021-01-22
 opcv: true
 text: true
 author: yoncho
@@ -15,7 +15,7 @@ order: 4
 # OpenCV에서 동영상 입력 & 출력
 OpenCV는 N차원 배열에 대한 복합적 연산을 수행할 수 있지만,  
 주된 용도는 **이미지 처리** 다.  
-그리고 동영상에서는 프레임당으로 **이미지정보**를 갖고와서 처리한다.     
+그리고 동영상에서는 프레임당으로 **이미지정보**를 가져와서 처리한다.     
 
 
 1. **동영상 입력**
