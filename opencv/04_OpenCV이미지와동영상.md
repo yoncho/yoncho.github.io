@@ -34,7 +34,7 @@ OpenCV에서는 파일 확장자를 보고 파일의 형식을 판단하는게 �
 파일 시그니처 정보를 읽어서 파일의 형식을 판단한다.  
 
 ![file_signature_png](https://user-images.githubusercontent.com/44021629/105210337-41104100-5b8e-11eb-9c07-a9a6a0425e60.PNG)
-png의 파일 헤더 시그니처는 80 50 4E 47 0D 0A 1A 0A 이다.  
+PNG 이미지의 파일 헤더 시그니처는 80 50 4E 47 0D 0A 1A 0A 이다.  
   
 <hr>
   
