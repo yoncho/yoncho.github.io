@@ -11,7 +11,6 @@ post-header: false
 header-img: ""
 order: 4
 ---
-
 # OpenCV에서 이미지 입력 & 출력
 OpenCV는 N차원 배열에 대한 복합적 연산을 수행할 수 있지만,  
 주된 용도는 **이미지 처리** 다.  
