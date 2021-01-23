@@ -96,18 +96,18 @@ python의 경우 cv2.CAP_PROP_FPS를 이용하면 입력된 동영상의 FPS값�
 
 <code>동영상 출력 함수</code>
 
-> capture.isOpened() : 동영상 파일 열기 성공 여부 확인
-> **capture.read()** : 동영상 파일에서 프레임을 읽음  
-> **capture.open(fileName)** : fileName 동영상을 읽음
-> **capture.release()** : 동영상 파일을 닫고 메모리 해제
+> - capture.isOpened() : 동영상 파일 열기 성공 여부 확인
+> - **capture.read()** : 동영상 파일에서 프레임을 읽음  
+> - **capture.open(fileName)** : fileName 동영상을 읽음
+> - **capture.release()** : 동영상 파일을 닫고 메모리 해제
 
 
 <code>동영상 출력 속성 함수</code>
 
-> **cv2.CAP_PROP_POS_MSEC** : 동영상의 현재 위치
-> **cv2.CAP_PROP_POS_FRAMES** : 동영상의 현재 프레임
-> **cv2.CAP_PROP_FPS** : 동영상 프레임 속도
-> **cv2.CAP_PROP_FRAME_COUNT** : 동영상의 총 프레임 수
+> - **cv2.CAP_PROP_POS_MSEC** : 동영상의 현재 위치
+> - **cv2.CAP_PROP_POS_FRAMES** : 동영상의 현재 프레임
+> - **cv2.CAP_PROP_FPS** : 동영상 프레임 속도
+> - **cv2.CAP_PROP_FRAME_COUNT** : 동영상의 총 프레임 수
 
 <hr>
 
