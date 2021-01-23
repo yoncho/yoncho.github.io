@@ -133,7 +133,7 @@ dst = cv2.merge(mv)
 
 <hr>
 
-우리가 궁금한건, 다중채널에서 단일채널로 분리했을 때, 해당 채널에서 특정 범위의 값으로 검출해야한다.  예를 들어 빨강채널에선 검출하려는 값과 일하는 범위는 255, 아니면 0의값으로 할당해줘야한다.  
+우리가 궁금한건, 다중채널에서 단일채널로 분리했을 때, 해당 채널에서 특정 범위의 값으로 검출해야한다.  예를 들어 빨강채널에선 검출하려는 값이 범위와 일치하면 255, 아니면 0의값으로 할당해줘야한다.  
 우리는 이러기 위해서 **배열 요소 범위 설정 함수**를 사용한다.  
 
 <code>배열 요소 범위 설정 함수</code>
@@ -212,7 +212,35 @@ dst = cv2.addWeighted(
 배열 병합 함수는 **알파 블렌딩** ( 이미지위에 다른 이미지를 투명하게 덧씌워 비치게하는 효과)을 구현할 수 있다.  
 입력이미지(src1)과 입력이미지(src2)를 아무 변화없이 그대로 사용할 경우, alpha = 1, beta = 1, gamma = 0으로 할당해서 사용하면 된다.  
 
+<br/>
 <code>색상 검출 예제</code>
+
+```js
+import cv2
+
+src = cv2.imread("tomato.jpg")
+hsv = cv.cvtColor(src, cv2.COLOR_BGR2HSV)
+
+h, s, v = cv2.split(hsv)
+
+lower_red = cv2.inRange(hsv, (0, 100, 100), (5, 255, 255))
+upper_red = cv2.inRange(hsv, (170, 100, 100), (179, 255, 255))
+mix_color = cv2.addWeighted(lower_red , 1.0, upper_red, 1.0, 0.0)
+
+dst = cv2.bitwise_and(hsv, hsv, mask = mix_color)
+dst = cv2.cvtColor(dst, cv2.COLOR_HSV2BGR)
+
+cv2.imshow("dst", dst)
+cv2.waitKey(0)
+cv2.destroyAllWindows()
+```
+> - 보고가야할 코드
+> - lower_red = cv2.Range(hsv, (0,100,100), (5, 255, 255))
+> - : hsv에서 (0,100,100) ~ (5, 255, 255) 낮은 빨강을 추출해낸다.
+> - upper_red는 (170, 100, 100) ~ (179, 255, 255)까지로, 높은 빨강을 추출해낸다.
+
+<hr>
+
 
 
 <hr>
