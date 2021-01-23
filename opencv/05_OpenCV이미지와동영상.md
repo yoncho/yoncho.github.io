@@ -230,10 +230,10 @@ videoWriter에 할당된 메모리를 해제해주고, isWriter를 False로 바�
     
 <code>동영상 저장 관련 함수</code>
 
-> **videoWriter.isOpened()** : 동영상 저장 성공 여부 확인
-> **videoWriter.write(ndarray)** : 동영상 파일에 해당 프레임을 저장
-> **videoWriter.open(fileName, fourcc, fps, frameSize, isColor = True)** : 동영상 저장 구조 생성
-> **videoWriter.release()** : 동영상 저장 구조 메모리 해제
+> - **videoWriter.isOpened()** : 동영상 저장 성공 여부 확인
+> - **videoWriter.write(ndarray)** : 동영상 파일에 해당 프레임을 저장
+> - **videoWriter.open(fileName, fourcc, fps, frameSize, isColor = True)** : 동영상 저장 구조 생성
+> - **videoWriter.release()** : 동영상 저장 구조 메모리 해제
 
 
 
