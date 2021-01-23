@@ -52,14 +52,14 @@ cv2.imread(
 <code>입력 함수의 flags</code>
 
 
-> cv2.IMREAD_UNCHANGED : 알파 채널 포함 이미지 반환 
+> - cv2.IMREAD_UNCHANGED : 알파 채널 포함 이미지 반환 
                          (알파채널 없을 경우, 3채널로 반환 )   
-> cv2.IMREAD_GRAYSCALE : 단일 채널, 그레이스케일 이미지로 변환  
-> cv2.IMREAD_COLOR : 다중 채널, 색상 이미지로 반환  
-> cv2.IMREAD_ANYDEPT : 정밀도가 있는 이미지의 경우 16/32비트 이미지로 반환 
+> - cv2.IMREAD_GRAYSCALE : 단일 채널, 그레이스케일 이미지로 변환  
+> - cv2.IMREAD_COLOR : 다중 채널, 색상 이미지로 반환  
+> - cv2.IMREAD_ANYDEPT : 정밀도가 있는 이미지의 경우 16/32비트 이미지로 반환 
                        (존재 하지 않을 경우 기본 8bit 이미지로 반환)  
-> cv2.IMREAD_REDUCED_GRAYSCALE_x : 크기를 1/x로 줄인 후 그레이스케일 적용  
-> cv2.IMREAD_REDUCED_COLOR_x : 크기를 1/x로 줄인 후 색상 이미지로 반환  
+> - cv2.IMREAD_REDUCED_GRAYSCALE_x : 크기를 1/x로 줄인 후 그레이스케일 적용  
+> - cv2.IMREAD_REDUCED_COLOR_x : 크기를 1/x로 줄인 후 색상 이미지로 반환  
 
 
 <hr>  
@@ -134,10 +134,10 @@ cv2.destroyAllWindows() : 모든 윈도우 제거
   
 <code>윈도우 flags</code>
 
-> cv2.WINDOW_NORMAL : 윈도우 크기 조절 가능, 최대화된 창을 이전 크기로 복원  
-> cv2.WINDOW_AUTOSIZE : 원도우 크기 조절 불가능, 이미지의 크기와 동일하게 표시  
-> cv2.WINDOW_KEEPRATIO : 이미지 비율을 최대한 유지  
-> cv2.WINDOW_FREERATIO : 비율 제한이 없는 경우, 이미지 최대한 확장 가능  
+> - cv2.WINDOW_NORMAL : 윈도우 크기 조절 가능, 최대화된 창을 이전 크기로 복원  
+> - cv2.WINDOW_AUTOSIZE : 원도우 크기 조절 불가능, 이미지의 크기와 동일하게 표시  
+> - cv2.WINDOW_KEEPRATIO : 이미지 비율을 최대한 유지  
+> - cv2.WINDOW_FREERATIO : 비율 제한이 없는 경우, 이미지 최대한 확장 가능  
 
 <hr>
 
@@ -163,10 +163,10 @@ cv.imwrite(
 
 <code>params 옵션</code>
 
-> cv2.IMWRITE_JPEG_QUALITY : JPEG화질 (0 ~ 100)  
-> cv2.IMWRITE_JPEG_PROGRESSIVE : JPEG 점차 선명해짐 (0, 1)  
-> cv2.IMWRITE_PNG_COMPRESSION : PNG 압축 (0 ~ 100)  
-> ...more...
+> - cv2.IMWRITE_JPEG_QUALITY : JPEG화질 (0 ~ 100)  
+> - cv2.IMWRITE_JPEG_PROGRESSIVE : JPEG 점차 선명해짐 (0, 1)  
+> - cv2.IMWRITE_PNG_COMPRESSION : PNG 압축 (0 ~ 100)  
+> - ...more...
    
  <hr>
 
