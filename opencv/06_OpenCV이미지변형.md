@@ -9,7 +9,7 @@ text: true
 author: yoncho
 post-header: false
 header-img: ""
-order: 4
+order: 6
 ---
 
 # OpenCV에서 이미지 변형, 이미지 전처리 작업

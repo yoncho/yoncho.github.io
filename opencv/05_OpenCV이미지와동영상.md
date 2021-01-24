@@ -9,7 +9,7 @@ text: true
 author: yoncho
 post-header: false
 header-img: ""
-order: 4
+order: 5
 ---
 
 # OpenCV에서 동영상 입력 & 출력
