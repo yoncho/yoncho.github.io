@@ -254,8 +254,115 @@ cv2.destroyAllWindows()
 **이미지 전처리에선 거의 필수로 사용된다.**  
 
 
+<code>이진화 함수</code>
+
+```js
+retval, dst = cv2.threshold(
+  src,
+  thresh,
+  maxval,
+  type
+)
+```
+> - **src** : 입력이미지
+> - **thresh** : 임계값,  임계값 보다 낮은 픽셀은 0 또는 원본 픽셀값으로 변경 
+임계값 보다 높은 픽셀은 최대값(maxval)로 변경
+> - **maxval** : 최대값, 임계값보다 높을시 변경되는 값
+> - **type** : 임계값 형식, **임계값 형식 참고**
+OpenCV에서는 결과(dst)이미지만 반환되는게 아닌, 설정임계값(retval)까지 반환해준다.  
+retval은 함수에 적어준 thresh와 동일한 값이다.    
+
+<code>임계값 형식</code>
+
+> - **cv2.THRESH_BINARY** : 임게값을 초과할 경우 maxval, 아닐경우 0
+> - **cv2.THRESH_BINARY_INV** : 임게값을 초과할 경우 0, 아닐경우 maxval  , **INV**는 역을 의미한다.
+> - **cv2.THRESH_TOZERO** : 임게값을 초과할 경우 변형없음, 아닐경우 0
+> - **cv2.THRESH_MASK** : 검은색 이미지로 변경(마스크용)
+> - **cv2.THRESH_OTSU** : 오츠 알고리즘 적용(단일 채널이미지에서만 적용가능)
+> - **cv2.THRESH_TRIANGLE** : 삼각형 알고리즘 적용(단일 채널이미지에서만 적용가능)
+
+### 오츠 알고리즘 & 삼각형 알고리즘
+입력된 이미지의 밝기분포(히스토그램)을 통해 최[적의 임계값을 찾아 이진화를 적용하는 알고리즘이다.  
+(자세히 다루진 않겠다.)  
+<hr>
+
+
+## 적응형 이진화 알고리즘
+입력 이미지에 따라 임계값이 스스로 다른 값을 할당할 수 있도록 해주는 알고리즘이다.  
+즉, 임계값이 스스로 주변환경에 의해 정해지는 것이다.  
+일반 이진화 알고리즘으로는 조명의 변화나 반사가 심한 경우 이미지 내의 밝기 분포가 달라져 상황이 변할때마다 임계값을 바꿔줘야하는 상황이 발생한다.  
+이런 변화하는 상황에 임계값을 알아서 바꿔주는게 **적응형 이진화 알고리즘** 이다.  
+
+
+<code>이진화 함수</code>
+
+```js
+dst = cv2.adaptiveThreshold(
+  src,
+  maxval,
+  adaptiveMethod,
+  thresholdType,
+  blocksize,
+  C
+)
+```
+> - src : 이미지
+> - maxval : 최댓값
+> - **adaptiveMethod** : **적응형 이진화 방식**
+> - thresholdType : 임계값 형식 (위 임계값 참고)
+> - **blocksize** : 픽셀 주변의 blocksize x blocksize 영역에 대한 가중 평균 계산
+> - C : 계산한 가중 평균에 상수 C를 감산한다.  
+> 
+> 픽셀마다 적응형 임계값 T(x, y)를 설정한다. 수식은 다음과 같다.  
+![적응형이진화수식](https://user-images.githubusercontent.com/44021629/105648553-6cc55b00-5eef-11eb-9963-d737aa94d9e7.PNG)
+
+> blocksize는 홀수만 가능하다.  상수 C는 일반적으로 양수를 쓰며, 0과 음수도 사용은 가능하다.  
+> **적응형 이진화 방식 (adaptiveMethod)**에 따라 결과가 변한다.  
+
+
+  
+  
+  
+<code>적응형 이진화 방식</code>
+
+> - **cv2.ADAPTIVE_THRESH_MEAN_C** : blocksize 영역의 모든 픽셀에 평균 가중치를 적용
+> - **cv2.ADAPTIVE_THRESH_GAUSSIAN_C** : blocksize 영역의 모든 픽셀에 중심점으로부터의 거리에 대한 가우시안 가중치를 적용
 
 <hr>
+
+<code>적응형 이진화 예제</code>
+src (입력이미지)
+![gomtange](https://user-images.githubusercontent.com/44021629/105649213-97fd7980-5ef2-11eb-94fd-148eef0ec0e4.jpg)
+
+```js
+import cv2
+
+src = cv2.imread("swan.jpg")
+gray = cv2.cvtColor(src, cv2.COLOR_BGR2GRAY)
+binary = cv2.adaptiveThreshold(gray, 255, cv2.ADAPTIVE_THRESH_MEAN_C, cv2.THRESH_BINARY, 33, -5)
+
+cv2.imshow("binary", binary)
+cv2.waitKey(0)
+cv2.destroyAllWindows()
+```
+result(결과)
+![after_bear](https://user-images.githubusercontent.com/44021629/105649225-a350a500-5ef2-11eb-9671-9db17aa84c53.PNG)
+
+> - 주요 코드 : binary
+> - binary는 적응형 이진화 함수로 gray를 입력이미지, 255를 maxval로 사용했다.
+> - 평균가중치를 적용하는 이진화 플래그를 사용, 임계값 형식으론 이진화 임계값보다 높으면 255, 아니면 0을 적용, blocksize는 33이고 상수 C는 -5이다.  
+> - 상수 C를 -5(음수)로 사용해 전체 영역이 어두워진다.  
+> - 일반적으로 음수를 사용하진 않지만, 특수한 경우 음수가 더 우수한 결과를 보이기도한다.
+> - 음수값을 지정할때에는 **임계값 형식**을 **반전 이진화 플래그 (cv2.THRESH_BINARY_INV**를 적용하거나 **이미지 반전연산**을 적용하는 방법은 빛의 반사나 서로 다른 조명이 이미지에 있는경우에 효과가 좋다.
+
+
+
+<hr>
+
+
+# 3. 흐림 효과
+
+
 
 []    
  
