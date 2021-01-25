@@ -330,14 +330,14 @@ dst = cv2.adaptiveThreshold(
 
 <hr>
 
-<code>적응형 이진화 예제</code>
+<code>적응형 이진화 예제</code>  
 src (입력이미지)
 ![gomtange](https://user-images.githubusercontent.com/44021629/105649213-97fd7980-5ef2-11eb-94fd-148eef0ec0e4.jpg)
 
 ```js
 import cv2
 
-src = cv2.imread("swan.jpg")
+src = cv2.imread("gomtange.jpg")
 gray = cv2.cvtColor(src, cv2.COLOR_BGR2GRAY)
 binary = cv2.adaptiveThreshold(gray, 255, cv2.ADAPTIVE_THRESH_MEAN_C, cv2.THRESH_BINARY, 33, -5)
 
@@ -360,7 +360,20 @@ result(결과)
 <hr>
 
 
+
+
 # 3. 흐림 효과
+흐림 효과는 **블러링(blurring)** 또는 **스무딩(smoothing)**이라 불리며,  
+**노이즈**를 줄이거나 외부영향을 최소화 하는데 사용한다.  
+단순히 이미지를 흐리게하는게 아니라 노이즈를 제거해서 연산시 계산을 빠르고 정확하게 할 수 있게 도와준다.  
+흐림 효과에는 **3가지 주요 매개변수**가 있다.  
+<code>커널(kernel)</code>, <code>고정점(anchor point)</code>, <code>테두리 외삽법(borderType)</code>이다.  
+
+그리고 흐림 효과 함수로는 **크게 5가지 함수**가 있다.  
+
+<hr>
+
+## 1. 커널 Kernel
 
 
 
