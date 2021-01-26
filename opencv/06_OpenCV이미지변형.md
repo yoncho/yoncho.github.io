@@ -419,11 +419,10 @@ result(결과)
 
 
 ## 2. 흐림 효과 함수
+![pro_blur](https://user-images.githubusercontent.com/44021629/105879670-ce97d900-6045-11eb-88bd-3757384085f5.png)
 
 
 ### 단순 흐림 효과
-![pro_blur](https://user-images.githubusercontent.com/44021629/105879670-ce97d900-6045-11eb-88bd-3757384085f5.png)
-
 
 <code>단순 흐림 함수</code>
 
