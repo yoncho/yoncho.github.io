@@ -369,11 +369,11 @@ result(결과)
 흐림 효과에는 **3가지 주요 매개변수**가 있다.  
 <code>커널(kernel)</code>, <code>고정점(anchor point)</code>, <code>테두리 외삽법(borderType)</code>이다.  
 
-그리고 흐림 효과 함수로는 **크게 5가지 함수**가 있다.  
-
+그리고 흐림 효과 함수로는 **크게 5가지 함수**가 있다.    
+<code>단순 흐림 효과</code>, <code>박스 필터 흐림 효과</code>, <code>중간값 흐림 효과</code>, <code>가우시안 흐림 효과</code>, <code>양방향 필터 흐림 효과</code>
 <hr>
 
-## 1. 커널 Kernel & 고정점 Anchor Point  
+## 1. 커널 Kernel | 고정점 Anchor Point | 테두리 외삽법 BorderType 
 
 ![kernel_anchorpoint](https://user-images.githubusercontent.com/44021629/105748809-f9225d00-5f85-11eb-8669-18ebdba1d1e1.png)
 
@@ -381,19 +381,183 @@ result(결과)
 커널은 이미지에서 (x, y)의 픽셀과 해당 픽셀 주변을 포함한 작은 크기의 공간을 의미한다.  
 이 영역 안에서 각 픽셀에 대해 특정 수식이나 함수등을 적용한 결과를 통해   
 새로운 이미지 데이터를 만드는 알고리즘에서 사용한다.  
+일반적으로 3x3, 5x5, 7x7을 많이 활용한다.  
+제일 효과가 좋은 커널의 크기라고 한다. 
 **영상처리를 비롯해 인공지능 공부를 하면서 많이 보게될 거다**  
 새로운 픽셀을 만들어 내기 위해 커널 크기의 화소 값을 이용해 어떤 시스템을 통과해 계산하는 것을 **컨벌루션 (Convolution)**이라 한다.  
 인공지능에서 **CNN**에서 C가 바로 Convolution이다.  
+![conv](https://user-images.githubusercontent.com/44021629/105865982-d439f280-6036-11eb-92c2-1ef6540ff25c.png)
+
 
 ### 고정점
 커널을 통해 컨벌루션된 값을 할당하는 지점이다.  
 커널 안에서 고정점은 하나의 지점을 가지며, 대부분 커널의 중심지점을 고정점으로 사용한다.  
 그리고 고정점은 이미지와 어떻게 정렬되는지 알려준다.  
+고정점 좌표의 값을 커널에 속해있는 좌표들을 컨벌루션 연산을 통해 새로운 값을 만든후, 고정점 좌표에 대입해주는 방식이다.  
 
 
-[]    
- 
-[]  
+### 테두리 외삽법
+하지만 문제가 하나 발생한다.. 만약 (0,0)좌표에서 3x3 커널로 컨벌루션 할려고하면 (-1, -1)등의 처리할 수 없는 좌표가 나타난다.  
+이럴때 원본 이미지에 커널 사이즈에 알맞게 테두리에 임의의 값을 구성된 층을 쌓아서,, 원본이미지의 모든 픽셀들이 정상적으로 컨번루션 연산을 수행할 수 있게 도와주는게   
+**테두리 외삽법**이다.  
+
+![bordertype](https://user-images.githubusercontent.com/44021629/105866702-9b4e4d80-6037-11eb-975a-db13c61c2c7f.jpg)
+위 그림을 보면, (0,0)좌표에서 3x3 커널로 컨벌루션 연산을 해주기위해, 원본 이미지에 0 값으로 입력된 층을 한개 테두리에 만들어줬다.  
+그러면 (0, 0)좌표도 정상적인 컨벌루션 연산을 수행할 수 있게된다.  
+
+<code>테두리 유형</code>
+
+> - **cv2.BORDER_CONSTANT** :  고정값으로 픽셀을 확장
+>                             iiiii | abcde | iiiii   
+> - **cv2.BORDER_REPLICATE** : 테두리 픽셀을 복사해서 확장
+>                             aaaaa | abcde | eeeee
+> - **cv2.BORDER_REFLECT** : 픽셀을 반사해서 확장
+>                             edcba | abcde | edcba
+
+<hr>
 
 
-<code>#영상처리 #동영상</code>
+## 2. 흐림 효과 함수
+
+### 단순 흐림 효과
+
+<code>단순 흐림 함수</code>
+
+```js
+dst = cv2.blur(
+  src,
+  ksize,
+  anchor = None,
+  borderType = None
+)
+```
+> - src : 입력 이미지
+> - ksize : 커널 사이즈  (ksize x ksize)
+> - anchor = None : 고정점이 None, Null , (-1, -1)을 사용하면 커널의 중앙이 고정점임을 의미한다.
+> - borderType : 테두리 외삽법
+
+<hr>
+
+### 박스 필터 흐림 효과
+
+<code>박스 필터 흐림 함수</code>
+
+```js
+dst = cv2.boxFilter(
+  src,
+  ddepth,
+  ksize,
+  anchor = None,
+  normalize = None,
+  borderType = None
+)
+```
+> - ddepth : 출력 이미지의 정밀도, -1을 의미하면 입력 이미지의 정밀도를 사용한다.
+> - normalize : 커널이 영역별 정규화를 할 것인지를 의미한다.  
+박스필터는 일반적으로 모든 값이 1의 값을 갖는다, 하지만 normalize(정규화)값을 True로 지정할 경우  
+**정규화된 박스 필터**로 변경되며, 커널의 모든 값이 커널의 개수(면적)로 나눈 값이된다.  
+
+
+![box_filter](https://user-images.githubusercontent.com/44021629/105869762-eddd3900-603a-11eb-85e4-0810fa44fd67.png)
+위 정규화 박스는 5x5커널 이므로 모든 커널 값들을 면적인 25의 수로 나눠, 전체 커널 합이 1이 되게끔한다.  
+정규화를 하지않으면 박스 필터 내부 커널 값이 모두 1인 상태로 총합은 25가 된다.  
+
+<hr>
+
+### 중간값 흐림 효과
+
+<code>중간값 흐림 함수</code>
+
+```js
+dst = cv2.medianBlur(
+  src,
+  ksize
+)
+```
+> - 중간값 흐림 효과는 고정점 없이, 중심 픽셀 주변으로 커널 크기의 이웃한 픽셀들의 중간값을 사용해 각 픽셀의 값을 변경한다.  여기서 중간값은 평균을 말하는게 아니다.  
+예를 들어, [1, 30, 50, 1000, 9000]이 있으면 여기서 중간값은 50을 의미한다. 즉, 순서들로 나열했을때 중간값을 의미한다.
+
+<hr>
+
+### 가우시안 흐림 효과
+흐림 효과 함수에서 가장 **유용한** 함수이다.    
+
+<code>가우시안 흐림 함수</code>
+
+```js
+dst = cv2.GaussianBlur(
+  src,
+  ksize,
+  sigmaX,
+  sigmaY = None,
+  borderType = None
+)
+```
+> - sigmaX : x방향의 가우스 커널 표준 편차
+> - sigmaY : y방향의 가우스 커널 표준 편차, None값일시 sigmaX와 같이 같아진다. 
+> - sigmaX와 sigmaY 모두 0으로 설정하면 커널의 크기에 의해 자동으로 설정된다.  
+
+![gaussian_s](https://user-images.githubusercontent.com/44021629/105871985-37c71e80-603d-11eb-85e5-41f9ff8d1e2b.png)
+
+<code>가우시안 흐림 효과 함수 예제</code>
+
+```js
+import cv2
+
+src = cv2.imread("moon_img.png")
+
+dst = cv2.GaussianBlur(src, (7, 7), 0, 0, cv2.BORDER_ISOLATED)
+
+cv2.imshow("dst", dst)
+cv2.waitKey(0)
+cv2.destroyAllWindows()
+```
+![gaussian_moon](https://user-images.githubusercontent.com/44021629/105877408-4e707400-6043-11eb-92e0-f625c153cc5c.png)
+
+
+
+<hr>
+
+
+### 양방향 필터 흐림 효과
+
+<code>양방향 필터 흐림 함수</code>
+가장자리(Edge)를 선명하게 보존하면서 노이즈를 우수하게 제거한다.  
+두종류의 가우시안 필터로 흐림 효과 적용한다.  
+
+```js
+dst = cv2.bilateralFilter(
+  src,
+  d,
+  sigmaColor,
+  sigmaSpace,
+  dst = None,
+  borderType = None
+)
+```
+> - d : 지름, 흐림효과를 적용할 각 픽셀 영역의 지름을 의미한다.
+> - sigmaColor : 색상 공간에서 사용할 가우시안 커널의 너비를 설정, 값이 클 수록 흐림 효과 적용 범위가 넓어진다.
+> - sigmaSpace : 좌표 공간에서 사용할 가우시안 커널의 너비를 설정, 값이 클 수록 인접한 픽셀에 영향을 미친다.
+
+
+<code>양방향 필터 흐림 효과 함수 예제</code>
+
+```js
+import cv2
+
+src = cv2.imread("moon.png")
+
+dst = cv2.bilateralFilter(src, 100, 33, 11, borderType = cv2.BORDER_ISOLATED)
+
+cv2.imshow("dst", dst)
+cv2.waitKey(0)
+cv2.destroyAllWindows()
+```
+![moon_af_bf](https://user-images.githubusercontent.com/44021629/105876590-76aba300-6042-11eb-906d-a401c5286efb.png)
+
+
+<hr>
+
+
+
+<code>#영상처리 #이미지 변형</code>
