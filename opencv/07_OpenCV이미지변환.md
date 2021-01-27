@@ -156,10 +156,10 @@ OpenCV에서 보간법은 두 픽셀 사이의 임의의 좌표 혹은 정수좌
 
 이미지를 줄이거나 늘릴때 새롭게 할당해야되는 픽셀들은 대부분 분수 픽셀(실수 좌표)에 위치해있다. 이때 보간법에 따라 어떻게 매핑할지가 결정된다.  
 
-> 이웃 보간법 : 분수 픽셀 위치에서 제일 가까운 원본 픽셀을 결과이미지의 픽셀값으로 사용한다.  
-> 쌍 선형 보간법 : 분수 픽셀 위치에서 2x2 크기의 주변 원본 픽셀과 가까운 거리에 따라 선형적으로 가중치를 할당해서 결과 픽셀값으로 사용한다.  
-> 바이큐빅 보간법 : 분수 픽셀 위치에서 4x4크기의 주변 원본 픽셀을 3차원 큐빅 스플라인으로 계산해서 사용한다.  
-> 영역 보간법 : 픽셀 간의 관계를 고려해 리샘플링한다. 결과 이미지 픽셀위치를 입력 이미지 픽셀의 위치에 배치하고 겹치는 영역의 평균을 구해 결과 이미지의 픽셀값으로 사용한다.  
+> **이웃 보간법** : 분수 픽셀 위치에서 제일 가까운 원본 픽셀을 결과이미지의 픽셀값으로 사용한다.  
+> **쌍 선형 보간법** : 분수 픽셀 위치에서 2x2 크기의 주변 원본 픽셀과 가까운 거리에 따라 선형적으로 가중치를 할당해서 결과 픽셀값으로 사용한다.  
+> **바이큐빅 보간법** : 분수 픽셀 위치에서 4x4크기의 주변 원본 픽셀을 3차원 큐빅 스플라인으로 계산해서 사용한다.  
+> **영역 보간법** : 픽셀 간의 관계를 고려해 리샘플링한다. 결과 이미지 픽셀위치를 입력 이미지 픽셀의 위치에 배치하고 겹치는 영역의 평균을 구해 결과 이미지의 픽셀값으로 사용한다.  
 
 기본적으로 **쌍 선형 보간법**을 가장 많이 활용하며,  
 이미지를 확대할 경우 **쌍 선형 보간법**이나 **바이큐빅 보간법**  
@@ -187,6 +187,90 @@ cv2.destroyAllWindows()
 
 
 ## 3. 대칭 & 회전
+**대칭**은 반사의 의미를 갖고있다.  
+변환할 행렬(이미지)에 2x2 행렬을 왼쪽 곱셈한다.  
+여기서 2x2행렬은 [[1, 0], [0, -1]] 또는 [[-1, 0], [0, 1]]이다.  
+정확히는 3x3행렬이지만 수평선은 유지되므로, 제외해서 2x2행렬로 쓰인다.   
+  
+**회전**은 좌표값을 회전시키는 좌표 회전행렬과 좌표축을 회전시키는 좌표축 행렬이있다. 
+회전 행렬은 모두 원점(0, 0)을 기준으로 진행하며,  
+좌표 회전행렬은 원점을 기준으로 좌표값을 회전시켜 매핑한다.  
+좌표축 회전행렬은 원점을 기준으로 행렬 자체를 회전시켜 새로운 행렬값을 구성한다.  
+
+![trans_img](https://user-images.githubusercontent.com/44021629/106056003-80f89a80-6131-11eb-8286-4c86dc184cf6.png)
+
+위 이미지에 대칭과 행렬에 대한 그림이 나와있다.  
+
+<code>대칭 함수</code>
+
+```js
+dst = cv2.filp(
+  src,
+  flipCode
+)
+```
+> - src : 입력이미지
+> - flipCode : 대칭 축 플래그
+
+<code>대칭 축 플래그</code>
+
+> - **flipCode < 0** : XY축 대칭 (상하좌우)
+> - **flipCode = 0** : X축 대칭 (상하 대칭)
+> - **flipCode > 0** : Y축 대칭 (좌우 대칭)
 
 
+회전 행렬은 원점을 중심으로 한 회전만 가능해서,, 임의의 중심점을 두고 회전하는 **아핀 변환**에 기반을 둔 회전을 해야한다.  
+그래서 2x3 아핀 변환 행렬을 사용해 임의의 중심을 기준으로 회전할 수 있다.  
+![2x3](https://user-images.githubusercontent.com/44021629/106057870-e5b4f480-6133-11eb-9fc6-e5eef06a9a3b.png)
+
+<code>회전 행렬 생성 함수</code>
+
+```js
+dst = cv2.getRotationMatrix2D(
+  center,
+  angle,
+  scale
+)
+```
+> - center : 회전의 기준이  될 중심, 원점을 기준으로 회전하므로 (0, 0)이다. 
+> - angle : 회전할 회전각도
+> - scale : 회전 후, 이미지의 확대 또는 축소 비율이다. 
+
+dst에는 **2x3 매핑 변환 행렬(matrix)**가 반환된다.  
+
+
+<code>회전 행렬의 재할당 예제</code>
+
+```js
+import cv2
+import math
+
+src = cv2.imread("bear.jpg")
+
+height, width, _ = src.shape
+center = (width/2, height/2)
+angle = 90
+scale = 0.5
+matrix = cv2.getRotationMatrix2D(center, angle, scale)
+
+radians = math.radians(angle)
+sin = math.sin(radians)
+cos = math.cos(radians)
+bound_w = int((height * scale * abs(sin)) + (width * scale * abs(cos)))
+bound_h = int((height * scale * abs(cos)) + (width * scale * abs(sin)))
+
+matrix[0, 2] += ((bound_w / 2) - center[0])
+matrix[1, 2] += ((bound_h / 2) - center[1])
+
+dst = cv2.warpAffine(src, matrix, (bound_w, bound_h))
+
+cv2.imshow("dst", dst)
+cv2.waitKey(0)
+cv2.destroyAllWindows()
+```
+
+![left_bear](https://user-images.githubusercontent.com/44021629/106060290-2bbf8780-6137-11eb-80a7-3ac7b81e3b95.png)
+
+위 코드, 회전후 이미지 중심점이 중요코드이다.
+<hr>
 <code>#영상처리 #이미지 변환</code>
