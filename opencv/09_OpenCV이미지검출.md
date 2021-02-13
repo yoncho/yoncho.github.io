@@ -201,8 +201,10 @@ dst = cv2.Canny(
 > - threshold2 : 상위 임계값
 > - apertureSize : 소벨 연산자 마스크 크기 (소벨 마스크 크기)
 > - L2gradient : l2-norm으로 방향성 그레이디언트를 정확하게 계산할 건지, 정확성은 떨어지지만 
-속도가 더 빠른 l1-norm으로 계산할지 결정, True = L2 / False = L1 
+속도가 더 빠른 l1-norm으로 계산할지 결정한다.  True = L2 / False = L1  
 **(아닐 수 있는 욘초 잡지식)**  
+
+
 인공지능에서 그레이디언트(기울기)를 구하는 방식은 총 2가지  
 L2, L1방식이 있다.
 
@@ -223,6 +225,7 @@ cv2.waitKey(0)
 cv2.destroyAllWindows()
 ```
 ![canny](https://user-images.githubusercontent.com/44021629/107853999-6b3ae300-6e5c-11eb-9bc6-678c9c490c66.PNG)
+보면 가장자리를 엄청 뚜렷하게 정확히 검출하는 것을 볼 수 있다.  
 
 <hr>
 

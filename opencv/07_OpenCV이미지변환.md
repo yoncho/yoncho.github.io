@@ -1,6 +1,6 @@
 ---
 layout: post
-title: OpenCV 이미지 변환[1]
+title: OpenCV 이미지 변환[1]_이미지 확대, 축소, 크기 조절, 대칭, 회전
 subtitle: "특징 검출과 데이터 해석을 위한 이미지 전처리"
 type: "OpenCV"
 createDate: 2021-01-27
