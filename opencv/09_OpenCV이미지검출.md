@@ -231,8 +231,151 @@ cv2.destroyAllWindows()
 
 ## 2. 윤곽선 검출
 
+가장자리 검출은 입력이미지에서 가장자리만 검출하는 것이지만, 검출된 객체들의 세그먼트(Segment : 서로 다른 두 점을 연결하는 가장 짧은 선)구성 요소가 구분돼있지 않아 어떤 형태인지 알 수 없다. 즉, 이미지에서 가장자리 검출은 했지만 그 가장자리가 어떤 객체의 가장자리인지,, 서로 구분할 수 있는 요소가 없다는 것인데.  
+이를 윤곽선 검출에서 진행한다.  
+윤곽선 검출은 전처리로 가장자리로 검출된 픽셀들을 대상으로 세그멘테이션(이미지에서 픽셀을 분류한뒤 그룹화)작업을 해준다.  
+검출된 윤곽선은 **형상의 분석** 과 **물체 감지 및 인식**에 가장 효과적인 방법이다.  
+
+윤곽선 검출 과정에서는 검출하기 좋은 상태의 이미지를 갖고 진행하는 것이다.  
+노이즈제거가 필수이며, 전처리로 가장자리 검출을 진행해야된다.  
+그러고 나면 <code>윤곽선 검색 방법</code> 과 <code>근사 방법</code>을 선택하는 것이다.   
+윤곽선 검색 방법으로 윤곽점들의 세그먼테이션 방법(선을 이어주는 방식)을 선택할 수 있고,  
+근사 방법으로 모든 윤곽선에 대한 윤곽점을 반환할 수 도있다.  
+우리가 윤곽선에서 제일 중요하게 생각해야되는게 **계층 구조**의 형태이다.  
+
+### 계층 구조
+
+윤곽선 계층구조는 세그먼테이션이 어떻게 분류되었는가에대한 정보를 담고있다.  
+즉, 물체안에 여러 가장자리 정보가 나온다면 물체의 세그먼테이션, 물체 안의 가장자리에대한 세그먼테이션들이 생겨난다.  
+물체안의 윤곽선들을 분류해서 필요한 윤곽선들만 쓸 수 있게 하는게 계층 구조이다.  
+어렵겠지만 이부분은 아래 설명을 더 보면 이해할 수 있을 것이다.  
+
+계층 구조는 기본적으로 **트리(Tree) 구조**의 형태이다.  
+
+![tree](https://user-images.githubusercontent.com/44021629/108619642-85328200-7469-11eb-873c-a1dd2b063443.png)
+
+위 그림에서 A 노드가 트리구조에서 최상위 노드인 **루트 노트**라 하며,  
+B와 C 노드의 **부모 노드 = A노드**라 할 수 있다.  
+그러면 A 노드한테 B와 C노드는 **자식 노드**라 한다.  
+자식노드가 없는 C노드의 경우에는 **잎(leaf) 노드**라 한다.  
+잎노드가 아닌 모든 노드는 **내부 노드**라고도 한다.  
+  
+윤곽선 계층구조에서 계층단계별 인덱스의 값을 구분해, **다음 윤곽선**, **이전 윤곽선**, **자식 윤곽선**, **부모 윤곽선**을 확인할 수 있다.  
+
+![test_tree](https://user-images.githubusercontent.com/44021629/108619889-3554ba80-746b-11eb-951f-8283a742c889.jpg)
+
+노드 0의 다음 윤곽선은 같은 레벨(최외각 윤곽선)에 있는 노드 2가 된다.  
+이전 윤곽선은 존재하지않아 -1을 반환하며, 부모노드도 존재하지않아 -1을 반환, 자식 노드는 존재한다.  
+이런 식으로 같은 레벨에 있는 노드끼리는 서로 이전, 다음 윤곽선으로 이어져있고,  
+자식과 부모, 다음, 이전 윤곽선에 대해 존재유무에 따라 해당 노드번호 또는 -1을 반환한다.  
 
 
+<hr>
+
+
+### 윤곽선 검출
+
+윤곽선 검출 함수의 중요 매개변수는 **검색방법 과 근사방법**이다.  
+검색방법은 윤곽선의 계층 구조에 영향을 미치며,  
+근사방법은 윤곽선들의 윤곽점 형태와 개수에 영향을 미친다.  
+
+<code>윤곽선 검출 함수</code>
+
+```js
+contours, hierarchy = cv2.findContours(
+	image,
+	mode,
+	method,
+	offset = None
+)
+```
+> - contours : 검출된 윤곽선 (반환값)  
+> - hierarchy : 계층 구조 (반환값)  
+> -	image : 입력이미지  
+> - mode : 검색방법, 어떤 계층구조의 형태를 사용할 것인지 결정 (아래 flag 참조)  
+> - method : 근사방법, 윤곽점 표시 방법 설정 (아래 flag 참조)  
+> - offset : 반환된 윤곽점들의 좌푯값에 이동할 값을 설정한다. 관심영역에서 윤곽선을 검출하거나 다른이미지에 표시하고자할때 사용한다.  
+
+<code>mode flag</code>
+
+> - **cv2.RETR_EXTERNAL** : 최외곽 윤곽선만 검색
+> - **cv2.RETR_LIST** : 모든 윤곽선 검출, 계층 구조 형성하지않음(모든 윤곽선을 동일한 레벨로 간주)
+> - **cv2.RETR_CCOMP** : 모든 윤곽선을 검출, 2단계 계층 구조로 구상화
+> - **cv2.RETR_TREE** : 모든 윤곽선을 검출하고 트리구조로 구성
+
+<code>method flag</code>
+
+> - **cv2.CHAIN_APPROX_NONE** : 검출된 모든 윤곽점 반환
+> - **cv2.CHAIN_APPROX_SIMPLE** : 수평,수직,대각선 부분을 압축해서 끝점만 반환
+> - **cv2.CHAIN_APPROX_TC89_KCOS** : The-Chain 체인 근사 알고리즘 적용
+
+<hr>
+
+### 윤곽선 그리기
+
+다각형 그리기 함수를 활용해 윤곽선을 그린다.  
+
+<code>윤곽선 그리기 함수</code>
+
+```js
+cv2.drawContours(
+	image,
+	contours,
+	contourIdx,
+	color,
+	thickness = None,
+	lineType = None,
+	hierarchy = None,
+	maxLevel = None,
+	offset = None
+)
+```
+> - image : 입력 이미지
+> - contours : 윤곽선
+> - contoursIdx : 윤곽선 번호, 설정하면 지정된 윤곽선만 그린다. 음수를 입력하면 모든 윤곽선을 그린다.   
+> - color : 색상  
+> - thickness : 두께  
+> - lineType : 선형 타입   
+> - hierarchy : 계층 구조, 윤곽선 검출 함수에서 반환된 계층 구조  
+> - maxLevel : 계증 구조 최대 레벨, 이미지에 그려질 윤곽선 계층 구조의 깊이 설정, 0으로 설정하면 최상위 레벨만 그려진다.  
+> - offset : 윤곽선 함수와 동일한 기능
+
+<hr>
+
+<code>윤곽선 검출 예제</code>
+
+```js
+import cv2
+import numpy as np
+
+src = cv2.imread("trump_card_1.jpg")
+dst = src.copy()
+
+kernel = cv2.getStructuringElement(cv2.MORPH_RECT, (3, 3))
+
+gray = cv2.cvtColor(src, cv2.COLOR_BGR2GRAY)
+ret, binary = cv2.threshold(gray, 230, 255, cv2.THRESH_BINARY)
+morp = cv2.morphologyEx(binary, cv2.MORPH_CLOSE, kernel, iterations=2)
+image = cv2.bitwise_not(morp)
+
+contours, hierarchy = cv2.findContours(image, cv2.RETR_TREE, cv2.CHAIN_APPROX_NONE)
+
+cv2.drawContours(dst, contours, -1, (0,0,255), 3)
+for i in range(len(contours)):
+	cv2.putText(dst, str(i), tuple(contours[i][0][0]), cv2.FONT_HERSHEY_COMPLEX, 1.3, (255,0,0), 1)
+	print(i, hierarchy[0][i])
+
+
+cv2.imshow("dst", dst)
+cv2.waitKey(0)
+cv2.destroyAllWindows()
+```
+![test_contours](https://user-images.githubusercontent.com/44021629/108620402-55867880-746f-11eb-8502-6171c44cd27d.PNG)
+
+1. 노이즈 제거를 위해 이진화(threshold) 적용  
+2. 모폴로지 연산을 통해 스펙클 제거 (morphologyEx)  
+3. 반전연산(bitwise_not)을 수행해서 이미지 최외각(네모 윤곽선)을 검출하지 않게 설정  
+4. 그후 윤곽선 검출 및 윤곽선 그리기 함수를 적용 (findContours, drawContorus)  
 
 
 <hr>
