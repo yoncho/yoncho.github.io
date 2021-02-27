@@ -380,4 +380,4 @@ cv2.destroyAllWindows()
 
 <hr>
  
-<code>#영상처리 #이미지 변환</code>
+<code>#영상처리 #이미지 검출</code>
