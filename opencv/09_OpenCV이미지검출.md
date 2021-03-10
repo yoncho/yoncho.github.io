@@ -9,7 +9,7 @@ text: true
 author: yoncho
 post-header: false
 header-img: ""
-order: 8
+order: 9
 ---
 
 # OpenCV에서 제일 중요한 부분, 이미지에서 특징점 검출 !!

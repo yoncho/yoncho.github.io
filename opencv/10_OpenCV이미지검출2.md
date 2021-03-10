@@ -9,7 +9,7 @@ text: true
 author: yoncho
 post-header: false
 header-img: ""
-order: 8
+order: 10
 ---
 
 ## 3. 다각형 근사
