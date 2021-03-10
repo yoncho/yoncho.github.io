@@ -1,6 +1,6 @@
 ---
 layout: post
-title: OpenCV 이미지 검출[2]_다각형 근사, 코너 검출,
+title: OpenCV 이미지 검출[2]_다각형 근사, 코너 검출
 subtitle: "주요 특징점 검출, 이미지내의 객체를 검출한다"
 type: "OpenCV"
 createDate: 2021-02-05
