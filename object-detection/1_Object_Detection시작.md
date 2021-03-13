@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Object Detection 이해_Region Proposal, Selective Search, IOU, NMS, mAP
+title: Object Detection 시작_Region Proposal, Selective Search, IOU, NMS, mAP
 subtitle: "객체 검출의 시작"
 type: "Object Detection"
 createDate: 2021-03-13
