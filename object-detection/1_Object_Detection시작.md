@@ -1,8 +1,8 @@
 ---
 layout: post
-title: Object Detection 이해
+title: Object Detection 이해_Region Proposal, Selective Search, IOU, NMS, mAP
 subtitle: "객체 검출의 시작"
-type: "Selective Search"
+type: "Object Detection"
 createDate: 2021-03-13
 od: true
 text: true
@@ -126,6 +126,58 @@ def compute_iou(prec_box, answ_box):
 
 #### 3-2 NMS (Non-Max Supression)
 
+NMS는 Detect된 bounding box중에서 가장 적합한 box만 남기고 모두 제거하는 필터역할을 한다.  
 
+<img width="300" alt="nms-1" src="https://user-images.githubusercontent.com/44021629/111022888-0fdb2100-8419-11eb-9777-8458411dff04.png">
 
+NMS를 적용하기 전 이미지를 보면,  
+Object Detection알고리즘은 object가 있을만한 위치에 많은 Detection(즉, bounding box 처리)를 하는 경향이 있다.  
+그래서 NMS를 적용해 우측 이미지를 보면, bounding box가 하나만 남아있는 걸 볼 수 있다.  
 
+![non_max_b_boxes](https://user-images.githubusercontent.com/44021629/111023281-6b0e1300-841b-11eb-9009-3b0788d94df1.png) 
+
+NMS는 confidence threshold(예측 임계값), iou threshold(iou 임계값)을 받아온다.  
+수행 로직은 다음과 같다.  
+1. Detected된 bounding box별로 특정 confidence threshold 이하의 값을 갖는 bounding box는 모두 제거한다.  
+2. 가장 높은 confidence score를 가진 box순으로 내림차순 정렬을 한다.  
+3. 높은 confidence score를 가진 box와 겹치는 또 다른 box를 정렬 순서대로 조사하여 iou가 특정 threshold(임계값)보다 큰 box들은 모두 제거한다.  
+4. 2, 3번 과정을 정렬순서대로 진행한다.  
+5. 남아있는 객체 bounding box를 선택한다.  
+
+<hr>
+
+#### 3-3 mAP (mean Average Precision)
+실제 object가 detect된 재현율(Recall)의 변화에 따른 정밀도(Precision)의 값을 평균한 성능 수치이다.  
+mAP를 하기위해선 **정밀도**와 **재현율**을 잘 알고있어야한다.  
+
+![image](https://user-images.githubusercontent.com/44021629/111023455-7a419080-841c-11eb-9dd0-b56afc8121ee.png)
+> - TN : 틀린 값) 실제값과 동일하게 예측한 것이다. 
+> - FP : 실제값과 다르게 예측한 것이다.  
+> - FN : 실제값을 예측하지 못 한것이다.  
+> - TP : 맞는 값) 실제값을 예측 성공한 것이다.  
+
+##### 정밀도 (= TP / (FP + TP))
+예측을 positive로한 대상중에서 예측과 실제값이 positive로 일치한 데이터의 비율이다.  
+즉, 예측한 것중에 실제값과 일치한 데이터의 비율을 의미한다.  
+
+##### 재현율 (= TP / (FN + TP))
+실제값이 positive한 대상중에서 예측과 실제값이 positive로 일치한 데이터의 비율이다.  
+즉, 실제값 중에서 예측에 성공한 실제 데이터의 비율을 의미한다.  
+
+<hr>
+
+confidence threshold(임계값)에 따른 재현율과 정밀도의 변화이다.  
+![1_mQ6a-tiHstNaC3lTxSibkA](https://user-images.githubusercontent.com/44021629/111023713-f7213a00-841d-11eb-9b61-75a44ec93e9e.jpeg)
+임계값이 높으면, bounding box를 만들 확률이 낮아지고, 정밀도는 상승하며, 재현율은 하락한다.  
+임계값이 낮으면, bounding box를 만들 확률이 높아지고, 정밀도는 하락하며, 재현율은 상승한다.  
+임계값과 정밀도는 비례하며, 재현율과는 반비례한다.  
+
+![다운로드](https://user-images.githubusercontent.com/44021629/111023794-50896900-841e-11eb-95cd-161afe0c85f6.png)
+재현율과 정밀도 그래프를 보면  
+빨간색 공간 영역이 AP(평균 예측율)이다.  
+객체 하나에 대한 AP가 이렇게 구해진다.  
+**우리가 구하는 이미지에서의 mAP는 이미지 상의 모든 객체 AP에 대한 평균이다.**
+
+<hr>
+
+<code>#객체 검출 #재미있다 :D</code>
