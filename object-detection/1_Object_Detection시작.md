@@ -128,11 +128,13 @@ def compute_iou(prec_box, answ_box):
 
 NMS는 Detect된 bounding box중에서 가장 적합한 box만 남기고 모두 제거하는 필터역할을 한다.  
 
-<img width="300" alt="nms-1" src="https://user-images.githubusercontent.com/44021629/111022888-0fdb2100-8419-11eb-9777-8458411dff04.png">
+<img width="600" alt="nms-1" src="https://user-images.githubusercontent.com/44021629/111023976-7c591e80-841f-11eb-9bd0-01ec88f8236d.png">
 
 NMS를 적용하기 전 이미지를 보면,  
-Object Detection알고리즘은 object가 있을만한 위치에 많은 Detection(즉, bounding box 처리)를 하는 경향이 있다.  
-그래서 NMS를 적용해 우측 이미지를 보면, bounding box가 하나만 남아있는 걸 볼 수 있다.  
+Object Detection알고리즘은 object가 있을만한 위치에  
+많은 Detection(즉, bounding box 처리)를 하는 경향이 있다. 
+그래서 우리는 불필요한 box들을 제거해줄 필요가 있다.   
+NMS를 적용해 우측 이미지를 보면, bounding box가 하나만 남아있는 걸 볼 수 있다.  
 
 ![non_max_b_boxes](https://user-images.githubusercontent.com/44021629/111023281-6b0e1300-841b-11eb-9009-3b0788d94df1.png) 
 
