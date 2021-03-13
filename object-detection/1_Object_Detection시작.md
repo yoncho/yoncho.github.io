@@ -74,11 +74,12 @@ Real-Time에 한계는 있으나 성능이 가장 좋은 모델은 Retina-Net이
 <hr>
 
 ### 2. Detection 을 위한 Deap Learning Network 구성  
+![1_V-zPIFD5Lhk-9-DVu3UHgw](https://user-images.githubusercontent.com/44021629/111024237-e7efbb80-8420-11eb-9a9d-1556cb55850a.png)
 
 back-end로써 뒤에서 더 정확히 다루겠지만, 이부분에서는 Feature Extraction (특징 추출), Network Prediction(네트웍 예측) 등이 이뤄진다.  
-앞서 설명한 object detection의 history에 등장했던 모델(알고리즘)들이 이부분에서 쓰이며,  
-대표적으로 RCNN계열, SSD, Retina-NET이 있으며 YOLO도 사용하지만 앞 모델들과는 독자적인 길을 걷고있는 아이이다.  
-YOLO를 주의깊게 봐야한다. (언제 또 급발진해서 어마무시하게 성장할지 모르는 아이다. )  
+앞서 설명한 object detection의 history에 등장했던 모델들이 이부분에서 쓰이며,  
+대표적으로 RCNN계열, SSD, Retina-NET이 있고, YOLO도 사용하지만 앞 모델들과는 독자적인 길을 걷고있는 아이이다.  
+YOLO를 주의깊게 봐야한다. (언제 어마무시하게 성장할지 모르는 아이다. )  
 back-bone으로는 Resnet을 범용으로 사용하며, Tensorflow API를 사용할떈 Inception/ Mobile Net을 쓴다.  
 
 ### 3. Detection에서 사용하는 평가 지표
