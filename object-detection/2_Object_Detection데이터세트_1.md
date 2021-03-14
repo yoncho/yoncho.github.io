@@ -212,12 +212,11 @@ for object in objects_list:
     print(object)
 
 ```
+> - 결과  
+> full_image_name: ../../data/voc/VOCdevkit/VOC2012/JPEGImages/2011_006674.jpg   
+> image_size: (500, 375)  
+> {'class_name': 'person', 'bndbox_pos': (235, 65, 376, 221)}  
 
-```js
-full_image_name: ../../data/voc/VOCdevkit/VOC2012/JPEGImages/2011_006674.jpg 
- image_size: (500, 375)
-{'class_name': 'person', 'bndbox_pos': (235, 65, 376, 221)}
-```
 
 
 
