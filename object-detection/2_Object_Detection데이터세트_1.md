@@ -23,7 +23,7 @@ order: 2
 
 ![pascal2](https://user-images.githubusercontent.com/44021629/111062301-69138500-84eb-11eb-90d9-d31e9af5287d.png)
 
-PASCAL VOC 2012 데이터세트는 Object Detection의 데이터셋에서 베이직으로  
+PASCAL VOC 2012 데이터세트는 Object Detection의 데이터세트에서 베이직으로  
 여겨진다. 객체 검출을 공부했다면 기본적으로 아는 데이터 세트라고 할 수 있다.  
 20개의 객체 카테고리가 존재하고,  
 Classification/Detection,  
@@ -32,7 +32,7 @@ Action Classification,
 Person Layout  
 의 기능을 한다.    
 
-Dataset은 총 5가지의 폴더를 포함하고있다.  
+Dataset은 총 5가지의 폴더를 포함하고있습니다.  
 1. Annotations : xml 파일들이 들어가있고, Image 한개당 포함하고있는 객체들의 Annotation정보를 갖고있다.    
 2. ImagesET : 어떤 이미지를 train, test, trainval, val에 사용할 것인지 매핑정보를 갖고있다.   
 3. JPEGImages : Detection/Segmentation에 사용될 원본 이미지로, xml과 파일명동일한 .jpg 파일들이다.    
@@ -41,7 +41,7 @@ Dataset은 총 5가지의 폴더를 포함하고있다.
 
 여기서 우리가 자주 사용할 것들은 **1. Annotations 와 3. JPEGImages**이다.  
 
-
+  
 ![제목 없음](https://user-images.githubusercontent.com/44021629/111062479-606f7e80-84ec-11eb-9017-f32a811594f3.png)
 
 위 그림처럼 원본 이미지(JPEGImages)와 Annotations정보(Annotation)을 가지고 원본이미지에 bounding box를 시각화 시켜줘야하며, 이렇게 데이터세트를 완성시켜준다.  
@@ -49,14 +49,13 @@ Dataset은 총 5가지의 폴더를 포함하고있다.
 
 ### PASCAL VOC DATASET 다운로드 및 정보 확인
 
-<code>데이터세트 다운로드 [shell]</code> 
-http://host.robots.ox.ac.uk/pascal/VOC/voc2012/VOCtrainval_11-May-2012.tar  
+<code>데이터세트 다운로드 [shell]</code>  
 
 ```js
 !wget http://host.robots.ox.ac.uk/pascal/VOC/voc2012/VOCtrainval_11-May-2012.tar
 !tar -xvf VOCtrainval_11-May-2012.tar -C ~/objectPrj/data/voc
 ```
-> objectPrj디렉터리 밑에 data밑에 voc라는 폴더를 만들고 거기에 다운 받은 voc데이터셋을 압축해제까지 해준다.   
+> objectPrj/data/voc/ 디렉터리에 폴더를 다운 받고, 압축해제까지 해준다.   
 
 <code>다운 받은 임의의 원본 이미지 확인하기 [code]</code>
 
@@ -149,6 +148,10 @@ plt.show()
 	</object>
 </annotation>
 ```
+> - 유의 깊게 봐야할 부분은 <object> 부분과 <name>, <bndbox>들이다.  
+> - <object>는 object 하나의 정보를 나타내는 틀이고,  
+> - 그 안에 이제 <name>은 object의 이름을 나타내며,  
+> - <bndbox>안에는 bounding box 좌상단, 우하단 좌표 정보가 있다.  
 <hr>
 
 ### Annotation XML 파일 정보 파싱하기
@@ -263,7 +266,7 @@ img_rgb = cv2.cvtColor(draw_img, cv2.COLOR_BGR2RGB)
 plt.figure(figsize=(10, 10))
 plt.imshow(img_rgb)
 ```
-
+> - 아래 그림 처럼, 원본 이미지위에 Annotation정보를 이용해 Bounding box를 그린다.  
 ![person](https://user-images.githubusercontent.com/44021629/111063347-5439f000-84f1-11eb-8a89-a0354514314a.PNG)
 
 
