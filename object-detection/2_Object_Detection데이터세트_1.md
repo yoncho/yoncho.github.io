@@ -148,10 +148,11 @@ plt.show()
 	</object>
 </annotation>
 ```
-> - 유의 깊게 봐야할 부분은 <object> 부분과 <name>, <bndbox>들이다.  
-> - <object>는 object 하나의 정보를 나타내는 틀이고,  
-> - 그 안에 이제 <name>은 object의 이름을 나타내며,  
-> - <bndbox>안에는 bounding box 좌상단, 우하단 좌표 정보가 있다.  
+> 유의 깊게 봐야할 부분은 <object> 부분과 <name>, <bndbox>들이다.  
+> <object>는 object 하나의 정보를 나타내는 틀이고,   
+> 그 안에 이제 <name>은 object의 이름을 나타내며,   
+> <bndbox>안에는 bounding box 좌상단, 우하단 좌표 정보가 있다.    
+
 <hr>
 
 ### Annotation XML 파일 정보 파싱하기
@@ -272,4 +273,4 @@ plt.imshow(img_rgb)
 
 <hr>
 
-<code>#객체 검출 #재미있다 :D</code>
+<code>#데이터 세트 #PASCAL_VOC #재미있다 :D</code>
