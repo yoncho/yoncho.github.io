@@ -74,9 +74,9 @@ cats = coco.loadCats(coco.getCatIds())
 > {'supercategory': 'person', 'id': 1, 'name': 'person'},  
 > {'supercategory': 'vehicle', 'id': 2, 'name': 'bicycle'}...  
 > 이런 형태의 카테고리 id별로 세부 정보들을 가져온다.   
-
-
-
+  
+[추후 더 정확한 내용들을 추가할 예정입니다.]  
+  
 
 
 
