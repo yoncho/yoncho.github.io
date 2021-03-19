@@ -20,7 +20,7 @@ RCNN -> SPPNet -> Fast RCNN -> Faster RCNN 순이다.
 이번 블로그에서는 위 네개의 RCNN들을 설명할 것이다.  
 그럼 시작하자 (부릉부릉)~  
 
-## RCNN (Regions with CNN)
+# 1. RCNN (Regions with CNN)
 
 ![rcnn](https://user-images.githubusercontent.com/44021629/111747070-31815000-88d2-11eb-97f3-f500848b906f.PNG)
 
@@ -53,7 +53,7 @@ Deep Learning 기반 객체검출 성능 입증했다.
 
 <hr>
 
-## SPP(Spatial Pyramid Pooling) Net | RCNN 단점을 보완
+# 2. SPP(Spatial Pyramid Pooling) Net | RCNN 단점을 보완
 
 SPPNet은 RCNN의 개선방안, Region Proposal된 2000개의 영역을 cnn으로 넣어선 안된다.  
 SPP는 CNN상에서 Image classification에서 서로 다른 이미지 크기를 고정된 크기로 변환하는 기법이다.  
@@ -68,14 +68,30 @@ RCNN을 보완하기위해서 Region Proposal로 나온 2000개의 region영역�
 SPP(Spatial Pyramid Pooling)는    
 Back of Visual Words(BOW)를 기반으로 나온 SPM(Spatial Pyramid Mating)에서 Max-Pooling을 적용한 것이다.  
 SPM은 Feature Map에 여러 분면으로 나눈 것들에서 정보를 갖고는 방식인데.  
-Max-Pooling을 적용하면, 각 분면에서 최댓값을 갖고오게된다.  
+Max-Pooling을 적용하면, 각 분면에서 최댓값을 갖고오게된다.   
+여기서 SPM 및 SPP의 최대 장점은 Input Data의 크기와는 상관없이 **나누는 분면에 따라** 결과 크기가 달라진다는 것이다.  
+즉, 기존에 영향을 받았던 서로다른 region 영역의 크기 문제에서 벗어날 수 있는 것이다.  
+
 ![spm-mxp](https://user-images.githubusercontent.com/44021629/111754845-cb012f80-88db-11eb-8140-cb69af359906.PNG)
+![spp-fcl](https://user-images.githubusercontent.com/44021629/111756623-c473b780-88dd-11eb-87dd-a2c3c39a8920.PNG)
 그렇게 되면 각 분면에서 나온 최대값들을 모아서 하나의 고정된 크기의 1D FC Input Data를 만들 수 있는 것이다.  
+
+![spp-net](https://user-images.githubusercontent.com/44021629/111810927-df641d00-8919-11eb-8ad8-c521cd883382.PNG)
+최종적인 SPPNet의 구조이다.  
+
+##### RCNN vs SPPNet
+![rccvssppnet](https://user-images.githubusercontent.com/44021629/111811322-45e93b00-891a-11eb-90f8-19d4c46d65b6.png)
+SPPNet이 시간을 엄청 단축시킬 수 있음을 확인할 수 있고, 또 서로 다른 Region들에 대해 처리할 수 있다.  
+
+<hr>
+
+# 3. Fast RCNN | SPPNet을 보완
 
 
 
 
 <hr>
+
 
 
 
