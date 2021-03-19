@@ -78,10 +78,16 @@ Max-Pooling을 적용하면, 각 분면에서 최댓값을 갖고오게된다.
 
 ![spp-net](https://user-images.githubusercontent.com/44021629/111810927-df641d00-8919-11eb-8ad8-c521cd883382.PNG)
 최종적인 SPPNet의 구조이다.  
+Input Img에 대해서 이미지 자체를 CNN으로 집어 넣음과 동시에  
+이미지에 대한 Region Proposal(Selective Search)를 진행한다.  
+Img가 들어간 CNN에서의 Feature Map들 위에, Selective Search의 결과물로 나온 2000개의 Region들을 Mapping 시키고  
+이를 SPP Layer에 넣어서 고정적인 FC Input Data로 만들어준다.  
+그러면 FC Layer를 거쳐서 classification(분류)를 진행하고,  
+동시에 Bounding Box Regression을 한다.  
 
 ##### RCNN vs SPPNet
 ![rccvssppnet](https://user-images.githubusercontent.com/44021629/111811322-45e93b00-891a-11eb-90f8-19d4c46d65b6.png)
-SPPNet이 시간을 엄청 단축시킬 수 있음을 확인할 수 있고, 또 서로 다른 Region들에 대해 처리할 수 있다.  
+SPPNet이 시간을 엄청 단축시킬 수 있음을 확인할 수 있고, 또 서로 다른 Region들에 대해 고정적인 FC Input data로 만들 수 있다.  
 
 <hr>
 
