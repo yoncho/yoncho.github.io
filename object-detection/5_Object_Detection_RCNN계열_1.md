@@ -130,9 +130,9 @@ GPU를 사용할 수 있고, 완벽한 End-to-End를 구성할 수 있다.
 RPN도 하나의 네트워크로 안에 Classification과 Bounding Box Regression이 다 들어가있다.  
 RPN에서는 대강 Object의 위치만 찾으면 되기때문에 빡세지 않고, 딥러닝 네트워크 끝에 있는 Classification과 Regression은 Object를   
 확실하게 Detect해주기 위해서 열심히 훈련해야된다.  
-하지만,,  
+여기서 문제점은..   
 RPN의 Input Data는 Feature Map의 pixel값, Target은 Ground Truth Bouning Box이다.  
-이걸 갖고 어떻게 Selective Search수준의 영역추정을 할 것인가??  
+이걸 갖고 어떻게 Selective Search수준의 영역추정을 할 것인가? 이다.  
 해답은 **(Reference)Anchor Box** 이다.  
 Object가 있는지 없는지 후보 box로써,  Anchor Box의 크기를 미리 정해놓고 Img위에 올려서 sliding window 방식으로  
 이미지 전체를 천천히 훑으면서, Anchor Box안에 Object가 있는지 없는지 조사를 한다.  
@@ -152,7 +152,7 @@ Object가 있는지 없는지 후보 box로써,  Anchor Box의 크기를 미리 
 1900 x 9 = 17100개의 Bounding Box가 생긴다.  
 효율적인 박스 처리를 위해서  
 17100개의 박스 중에서 **좋은 박스**와 **나쁜 박스**를 걸러줘야한다.  
-이 역활을 RPN (Region Proposal Network)가 수행하는 것이다.  
+이 역활을 RPN (Region Proposal Network)이 수행하는 것이다.  
 
 
 <hr>
