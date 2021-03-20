@@ -172,7 +172,9 @@ Regression에는 1x1conv 4x9 Output channel이 생긴다.
 즉, Ground Truth Box와 겹치는 IOU값에 따라 Anchor Box를  
 > IOU >= 0.7 : Positive  
 > IOU Max Anchor Box : Positive  
-> IOUT < 0.3 : Negative  
+> IOUT < 0.3 : Negative   
+  
+
 기준에 따라 Positive / Negative로 구분(labeling)한다.  
 
 **RPN의 Classification 과 Bounding Box Regression**  
@@ -180,7 +182,46 @@ Classification은 Anchor Box에 Positive/ Negative를 분류하는 기능을 하
 Regression은 Predicted box(예측 박스)와 Positive box의 차이를 줄여나가는 방향이다.  
 즉, RPN은 Positive Box가 되게끔 예측해서 찾아가는 것이다.   
 
+<hr>
+
+#### RPN의 Loss함수
+
+![rpnloss](https://user-images.githubusercontent.com/44021629/111865380-0ff39780-89aa-11eb-84a4-2c3c7d515b2b.PNG)
+
+#### RPN 학습
+Mini Batch를 정해서, 한번에 256 Anchor( 128 positive, 128 negative)씩 학습을 진행하겠다고 하자.  
+Mini Batch는 학습시킬 데이터가 너무 많으면 한번에 진행하기 어려워서 여러개의 Batch들로 나눠서 진행할때 쓰이며,  
+batch size가 곧, 학습시킬 데이터의 양이다.  
+RPN에서 Anchor Box가 40 x 50 x 9라고하면 18000개 인데, 이른 256개씩 나눠서 순차적으로 학습하는 것이다.  
+
+#### Region Proposal 영역 Filtering
+18000개를 다 학습시킬 필요가 없다,,  
+18000개 중에서 FG(four ground)만 넘겨준다.  
+그리고 예측 영역 추정 박스에는 Objectness Score를 매긴다.  
+Objectness Score = 예측box가 Object일 확률 (= Softmax값)  x  Ground Truth Bounding Box와의 IOU값  
+Objectness Score가 높은 순으로 Region Proposal Box 추출을 한다.  
+그러면 그 영역 안에서 이제 Object를 찾는다.  
+
+#### Faster RCNN Training 
+
+![fasterrcnntrianing](https://user-images.githubusercontent.com/44021629/111865665-a96f7900-89ab-11eb-99d6-6ad4d24582b5.PNG)
+
+ 먼저 RPN을 학습시킨다. RPN에서 Object 영역을 잘 추정할 수 있게끔, 역전파도 하면서 RPN을 최적의 상태로 만든다.  
+ 그러면 Fast RCNN을 학습시킨다. Object를 잘 찾을 수 있게 학습시킨다. 근데 여기서 문제가,,  
+ 역전파를 하게되면, RPN에도 역전파가 들어가서 기존에 만들어놨던 최적의 RPN상태가 망가진다.  
+ 그래서 RPN의 1x1 FC Layer(classification, regression)을 fine tuning해서 RPN에서 역전파가 수행되지않게 만든다.  
+ 그리고 Fast RCNN의 FC Layer (공통 2개)를 fine tuning한 후,  
+ 최종적으로 학습이 원활하게 진행되게 한다.  
+
+ #### Faster RCNN 최종..  
+ 기존 RCNN계열에서 시간적인 측면과 효율적인 측면에서 모두 높은 성과를 낸 최종결과물이다.  
+ 지금까지는 2stage detector에 대해 설명했고,  
+ 다음 블로그로는 1stage detector이자 성능이 훨씬 더 뛰어난 애들에 대해 글을 작성하겠다.  
+ 
+
 
 <hr>
 
-<code>#데이터 세트 #MS_COCO #재미있다 :D</code>
+
+
+<code>#RCNN계열 #ObjectDetectionNetwork # #재미있다 :D</code>
