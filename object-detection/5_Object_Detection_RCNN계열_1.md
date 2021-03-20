@@ -188,7 +188,7 @@ Regression은 Predicted box(예측 박스)와 Positive box의 차이를 줄여�
 
 ![rpnloss](https://user-images.githubusercontent.com/44021629/111865380-0ff39780-89aa-11eb-84a4-2c3c7d515b2b.PNG)
 
-#### RPN 학습
+#### RPN Mini batch
 Mini Batch를 정해서, 한번에 256 Anchor( 128 positive, 128 negative)씩 학습을 진행하겠다고 하자.  
 Mini Batch는 학습시킬 데이터가 너무 많으면 한번에 진행하기 어려워서 여러개의 Batch들로 나눠서 진행할때 쓰이며,  
 batch size가 곧, 학습시킬 데이터의 양이다.  
@@ -207,17 +207,19 @@ Objectness Score가 높은 순으로 Region Proposal Box 추출을 한다.
 ![fasterrcnntrianing](https://user-images.githubusercontent.com/44021629/111865665-a96f7900-89ab-11eb-99d6-6ad4d24582b5.PNG)
 
  먼저 RPN을 학습시킨다. RPN에서 Object 영역을 잘 추정할 수 있게끔, 역전파도 하면서 RPN을 최적의 상태로 만든다.  
- 그러면 Fast RCNN을 학습시킨다. Object를 잘 찾을 수 있게 학습시킨다. 근데 여기서 문제가,,  
+ 그러고나면 Fast RCNN을 학습시킨다. Object를 잘 찾을 수 있게 학습시킨다.   
+ 근데 여기서 문제가,,  
  역전파를 하게되면, RPN에도 역전파가 들어가서 기존에 만들어놨던 최적의 RPN상태가 망가진다.  
  그래서 RPN의 1x1 FC Layer(classification, regression)을 fine tuning해서 RPN에서 역전파가 수행되지않게 만든다.  
- 그리고 Fast RCNN의 FC Layer (공통 2개)를 fine tuning한 후,  
+ 그러면 최적의 상태인 RPN은 그대로 유지되며,  
+Fast RCNN의 FC Layer (공통 2개)를 fine tuning한 후,  
  최종적으로 학습이 원활하게 진행되게 한다.  
 
  #### Faster RCNN 최종..  
  기존 RCNN계열에서 시간적인 측면과 효율적인 측면에서 모두 높은 성과를 낸 최종결과물이다.  
  지금까지는 2stage detector에 대해 설명했고,  
  다음 블로그로는 1stage detector이자 성능이 훨씬 더 뛰어난 애들에 대해 글을 작성하겠다.  
- 
+
 
 
 <hr>
