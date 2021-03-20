@@ -154,8 +154,33 @@ Object가 있는지 없는지 후보 box로써,  Anchor Box의 크기를 미리 
 17100개의 박스 중에서 **좋은 박스**와 **나쁜 박스**를 걸러줘야한다.  
 이 역활을 RPN (Region Proposal Network)이 수행하는 것이다.  
 
-
 <hr>
 
+**RPN 구조**  
+
+![rpn구조](https://user-images.githubusercontent.com/44021629/111864847-b2aa1700-89a6-11eb-82fe-9ae946af17b6.PNG)
+
+RPN에서 입력된 Feature Map에 3x3 Convolution을 수행한다.  
+그리고 1x1 Fully Convolutional Layer가 Feature Map의 크기에 상관없이  
+**고정적인 FC Layer Input Data**로 만들어준다.  
+즉, 1x1FC Layer가 ROI나 SPP와 같은 역활을 하는 것이다.  
+그리고 최종적으로 Classification에는 1x1conv 2x9 Output channel이 생기고  
+Regression에는 1x1conv 4x9 Output channel이 생긴다.  
+
+##### Positive Anchor Box / Negative Anchor Box
+위에서 RPN은 **좋은 박스**와 **나쁜 박스**를 구분한다고 했다.  
+즉, Ground Truth Box와 겹치는 IOU값에 따라 Anchor Box를  
+> IOU >= 0.7 : Positive  
+> IOU Max Anchor Box : Positive  
+> IOUT < 0.3 : Negative  
+기준에 따라 Positive / Negative로 구분(labeling)한다.  
+
+**RPN의 Classification 과 Bounding Box Regression**  
+Classification은 Anchor Box에 Positive/ Negative를 분류하는 기능을 하고,  
+Regression은 Predicted box(예측 박스)와 Positive box의 차이를 줄여나가는 방향이다.  
+즉, RPN은 Positive Box가 되게끔 예측해서 찾아가는 것이다.   
+
+
+<hr>
 
 <code>#데이터 세트 #MS_COCO #재미있다 :D</code>
