@@ -112,10 +112,50 @@ Fast RCNN은 SPP에서 ROI, Softmax, End2End정도만 바뀌어서 설명이 길
 위 세개의 바뀐 점들이 매우 중요하다.  
 
 
+##### 발전해도,, 남아있는 문제점  
+Region Proposal에서 진행되는 Selective Search로 나온 2000개의 Region들에대한 처리가 많은 처리시간을 요구한다.  
 
 <hr>
 
+# 4. Faster RCNN | RCNN계열의 최강자  
+**Faster RCNN = RPN(Region Proposal Network) + Fast RCNN**  
+Selective Search를 하는 Region Proposal를 Deap Learning의 Network 구조로 바꾸면,  
+GPU를 사용할 수 있고, 완벽한 End-to-End를 구성할 수 있다.  
 
+![Fstrrcnn](https://user-images.githubusercontent.com/44021629/111862486-f4cc5c00-8998-11eb-9307-aedac9016c20.PNG)
+ 
+**Faster RCNN구조**  
+![FSTERRCNN](https://user-images.githubusercontent.com/44021629/111862886-79b87500-899b-11eb-93fe-0f9d20183bf8.PNG)
+
+RPN도 하나의 네트워크로 안에 Classification과 Bounding Box Regression이 다 들어가있다.  
+RPN에서는 대강 Object의 위치만 찾으면 되기때문에 빡세지 않고, 딥러닝 네트워크 끝에 있는 Classification과 Regression은 Object를   
+확실하게 Detect해주기 위해서 열심히 훈련해야된다.  
+하지만,,  
+RPN의 Input Data는 Feature Map의 pixel값, Target은 Ground Truth Bouning Box이다.  
+이걸 갖고 어떻게 Selective Search수준의 영역추정을 할 것인가??  
+해답은 **(Reference)Anchor Box** 이다.  
+Object가 있는지 없는지 후보 box로써,  Anchor Box의 크기를 미리 정해놓고 Img위에 올려서 sliding window 방식으로  
+이미지 전체를 천천히 훑으면서, Anchor Box안에 Object가 있는지 없는지 조사를 한다.  
+
+**Anchor Box 구성**  
+
+![제목 없음](https://user-images.githubusercontent.com/44021629/111863261-c604b480-899d-11eb-8713-c7befa3de393.png)
+
+
+**Feature Map에 생기는 Anchor Point(Grid)**  
+![anchorpo](https://user-images.githubusercontent.com/44021629/111864304-6d381a80-89a3-11eb-8d93-90e389f7b9db.PNG)
+
+**원본 이미지에 생기는 Anchor Point(Grid)**  
+![imganchor](https://user-images.githubusercontent.com/44021629/111864313-7b863680-89a3-11eb-96f0-cf3fd36e925d.PNG)  
+
+이렇게 보면, 원본 이미지(800x600)에 생기는 Anchor Point (1900개)에 총 9개의 Anchor Box가 생기니까  
+1900 x 9 = 17100개의 Bounding Box가 생긴다.  
+효율적인 박스 처리를 위해서  
+17100개의 박스 중에서 **좋은 박스**와 **나쁜 박스**를 걸러줘야한다.  
+이 역활을 RPN (Region Proposal Network)가 수행하는 것이다.  
+
+
+<hr>
 
 
 <code>#데이터 세트 #MS_COCO #재미있다 :D</code>
