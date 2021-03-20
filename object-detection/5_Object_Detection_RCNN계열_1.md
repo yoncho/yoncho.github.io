@@ -92,7 +92,24 @@ SPPNet이 시간을 엄청 단축시킬 수 있음을 확인할 수 있고, 또 
 <hr>
 
 # 3. Fast RCNN | SPPNet을 보완
+SPPNet에서 SPP Layer를 ROI Pooling Layer로 바꾸고,  
+기존에 Classification에 있던 SVM을 Softmax로 변환하며,  
+Classification과 Regression을 함께 최적화하는  
+Multi-task Loss가 있는게 **Fast RCNN**이다. 
+그리고 End-to-End Network Learning의 시작이다.      
+여기서 봐야할것은, ROI Pooling은 기존 SPP의 region영역에서 여러분면(1x1, 2x2, 4x4)으로 나누는 행위를 없애고,  
+단, 하나 !  **7 x 7로 나눈 분면을 이용한다.**  
+그리고 End-to-End는 순전파도 가능하지만, 역전파도 가능해서 결과에대한 loss를 더 확실하게 줄일 수 있다.  
 
+![Fastrcnn](https://user-images.githubusercontent.com/44021629/111861615-11659580-8993-11eb-8317-60bfd2d8722f.PNG)
+
+![frcnn](https://user-images.githubusercontent.com/44021629/111861907-162b4900-8995-11eb-8a1c-a3f3077441b5.PNG)  
+ 
+Multi-task Loss  
+![loss](https://user-images.githubusercontent.com/44021629/111861908-16c3df80-8995-11eb-92ff-436b3cf893e2.PNG)
+
+Fast RCNN은 SPP에서 ROI, Softmax, End2End정도만 바뀌어서 설명이 길진 않지만,  
+위 세개의 바뀐 점들이 매우 중요하다.  
 
 
 
