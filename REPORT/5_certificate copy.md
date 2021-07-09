@@ -2,7 +2,7 @@
 layout: post
 title: 자격증 ✨
 subtitle: 
-type: "startup/outside activities"
+type: "certificate"
 createDate: 2021-06-02
 report: true
 text: true
