@@ -9,9 +9,8 @@ text: true
 author: "yoncho"
 post-header: false
 header-img: ""
-order: 5
+order: 2
 ---
-
 
 ## RCNN 계열
 RCNN은 Region with CNN으로써, Region Proposal(영역 추정)을 기반으로한 Object Detection Network이다.  
