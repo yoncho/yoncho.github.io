@@ -2,7 +2,7 @@
 layout: post
 title: Object Detection Dataset [1] | PASCAL VOC 2012
 subtitle: "PASCAL_VOC_DATASET"
-type: "Dataset"
+type: "Object Detection"
 createDate: 2021-03-14
 private: true
 text: true

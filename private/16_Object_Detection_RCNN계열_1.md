@@ -2,7 +2,7 @@
 layout: post
 title: Object Detection Network [1] RCNN계열 | RCNN, SPPNet, Fast RCNN, Faster RCNN
 subtitle: "Region Proposal with Convolution Neural Network | RCNN"
-type: "RCNN"
+type: "Object Detection"
 createDate: 2021-03-19
 private: true
 text: true

@@ -2,7 +2,7 @@
 layout: post
 title: Object Detection Dataset [3] | Google Open Image
 subtitle: "OPEN_IMAGE_DATASET"
-type: "Dataset"
+type: "Object Detection"
 createDate: 2021-03-14
 private: true
 text: true
