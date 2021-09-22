@@ -4,7 +4,7 @@ title: OpenCV 이미지 변환[2]_기하학적 변환, 모폴로지 변환 및 �
 subtitle: "특징 검출과 데이터 해석을 위한 이미지 전처리"
 type: "OpenCV"
 createDate: 2021-01-27
-opcv: true
+private: true
 text: true
 author: yoncho
 post-header: false

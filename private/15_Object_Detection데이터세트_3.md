@@ -4,12 +4,12 @@ title: Object Detection Dataset [3] | Google Open Image
 subtitle: "OPEN_IMAGE_DATASET"
 type: "Dataset"
 createDate: 2021-03-14
-od: true
+private: true
 text: true
 author: "yoncho"
 post-header: false
 header-img: ""
-order: 4
+order: 15
 ---
 
 

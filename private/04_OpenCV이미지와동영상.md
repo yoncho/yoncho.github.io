@@ -4,7 +4,7 @@ title: OpenCV 이미지 I/O
 subtitle: "이미지 입력 & 출력"
 type: "OpenCV"
 createDate: 2021-01-20
-opcv: true
+private: true
 text: true
 author: yoncho
 post-header: false

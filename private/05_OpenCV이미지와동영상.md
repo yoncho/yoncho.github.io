@@ -4,7 +4,7 @@ title: OpenCV 동영상 I/O
 subtitle: "동영상 입력 & 출력"
 type: "OpenCV"
 createDate: 2021-01-22
-opcv: true
+private: true
 text: true
 author: yoncho
 post-header: false

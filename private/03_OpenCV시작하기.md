@@ -4,7 +4,7 @@ title: OpenCV 시작하기
 subtitle: "기계의 눈을 담당하는 라이브러리"
 type: "OpenCV"
 createDate: 2021-01-19
-opcv: true
+private: true
 text: true
 author: yoncho
 post-header: false

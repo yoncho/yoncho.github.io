@@ -4,12 +4,12 @@ title: Object Detection Dataset [2] | MS COCO
 subtitle: "MS_COCO_DATASET"
 type: "Dataset"
 createDate: 2021-03-14
-od: true
+private: true
 text: true
 author: "yoncho"
 post-header: false
 header-img: ""
-order: 3
+order: 14
 ---
 
 

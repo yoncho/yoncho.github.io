@@ -1,13 +1,13 @@
 ---
 layout: default
-title: "Object Detection, 객체 검출 🎮"
-description: 뜨는 기술 with Tensorflow & OpenCV
+title: "공적인 공부 기록지 🎮"
+description: CANlib /
 main: true
 project-header: true
 ---
 
 <ul class="catalogue">
   {% assign sorted = site.pages | sort: 'order' | reverse %} {% for page in
-  sorted %} {% if page.od == true %} {% include post-list.html %} {% endif %}
+  sorted %} {% if page.public == true %} {% include post-list.html %} {% endif %}
   {% endfor %}
 </ul>

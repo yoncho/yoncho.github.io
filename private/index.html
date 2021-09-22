@@ -1,12 +1,12 @@
 ---
 layout: default
 title: "개인적 공부 기록지 💾"
-description: OpenCV, 컴퓨터비전을 품고있는 아이 🎥  <br\>ㅇㄹㅇㄹ
+description: OpenCV, 컴퓨터비전을 품고있는 아이 🎥
 main: true
 project-header: true
 ---
 
 <ul class="catalogue">
   {% assign sorted = site.pages | sort: 'order' | reverse %} {% for page in
-  sorted %} {% if page.opcv == true %} {% include post-list.html %} {% endif %} {% endfor %}
+  sorted %} {% if page.private == true %} {% include post-list.html %} {% endif %} {% endfor %}
 </ul>

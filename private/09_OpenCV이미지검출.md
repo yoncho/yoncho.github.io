@@ -4,7 +4,7 @@ title: OpenCV 이미지 검출[1]_가장자리 검출, 윤곽선 검출
 subtitle: "주요 특징점 검출, 이미지내의 객체를 검출한다"
 type: "OpenCV"
 createDate: 2021-02-05
-opcv: true
+private: true
 text: true
 author: yoncho
 post-header: false

@@ -4,12 +4,12 @@ title: Object Detection 시작_Region Proposal, Selective Search, IOU, NMS, mAP
 subtitle: "객체 검출의 시작"
 type: "Object Detection"
 createDate: 2021-03-13
-od: true
+private: true
 text: true
 author: "yoncho"
 post-header: false
 header-img: ""
-order: 1
+order: 12
 ---
 
 

@@ -4,12 +4,12 @@ title: Object Detection Dataset [1] | PASCAL VOC 2012
 subtitle: "PASCAL_VOC_DATASET"
 type: "Dataset"
 createDate: 2021-03-14
-od: true
+private: true
 text: true
 author: "yoncho"
 post-header: false
 header-img: ""
-order: 2
+order: 13
 ---
 
 ### Object Detection Dataset

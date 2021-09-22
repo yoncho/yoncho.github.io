@@ -4,7 +4,7 @@ title: OpenCV 이미지 검출[3]_직선 검출, 원 검출
 subtitle: "주요 특징점 검출, 이미지내의 객체를 검출한다"
 type: "OpenCV"
 createDate: 2021-03-10
-opcv: true
+private: true
 text: true
 author: yoncho
 post-header: false
