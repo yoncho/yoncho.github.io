@@ -10,7 +10,7 @@
             <ul>
                 <li class="transition">
                     <a href="{{ '' | prepend: site.baseurl }}/"
-                        {% if current[1] == "private" or current[1] == "public" or current[1] == "report" %}
+                        {% if current[1] == "private" or current[1] == "public" or current[1] == "life" %}
                         class="normal" {% endif %} class="active">About</a>
                 </li>
                 <li class="transition">
@@ -22,8 +22,8 @@
                         class="active" {% endif %}>Public</a>
                 </li>
                 <li class="transition">
-                    <a href="{{ '/REPORT' | prepend: site.baseurl }}" {% if current[1] == "report" %} 
-                        class="active" {% endif %}>Report</a>
+                    <a href="{{ '/life' | prepend: site.baseurl }}" {% if current[1] == "life" %} 
+                        class="active" {% endif %}>Life</a>
                 </li>
             </ul>
         </div>

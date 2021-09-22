@@ -1,6 +1,6 @@
 ---
 layout: default
-title: "Report, 회고록 📝"
+title: "삶, 회고록 📝"
 description: 남들 놀 때, 나는 경험을 한다.
 main: true
 project-header: true
@@ -8,6 +8,6 @@ project-header: true
 
 <ul class="catalogue">
   {% assign sorted = site.pages | sort: 'order' | reverse %} {% for page in
-  sorted %} {% if page.report == true %} {% include post-list.html %} {% endif %}
+  sorted %} {% if page.life == true %} {% include post-list.html %} {% endif %}
   {% endfor %}
 </ul>

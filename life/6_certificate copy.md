@@ -4,7 +4,7 @@ title: 자격증 ✨
 subtitle: 
 type: "certificate"
 createDate: 2021-06-02
-report: true
+life: true
 text: true
 author: "yoncho"
 post-header: false
