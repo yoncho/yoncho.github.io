@@ -1,9 +1,9 @@
 ---
 layout: post
-title: CAN 통신이란??
-subtitle: "자동차 통신 프로토콜"
-type: "CAN"
-createDate: 2021-09-22
+title: 자동차 내부 통신 프로토콜
+subtitle: "자동차에선 어떤 통신들이 이루어지는가??"
+type: "auto"
+createDate: 2021-10-09
 public: true
 text: true
 author: yoncho
@@ -16,7 +16,7 @@ order: 1
 
 <hr>
 
-
+작성중입니다 :>
 
 
 <hr>
